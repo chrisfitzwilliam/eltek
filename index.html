@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>ELTEK International Laboratories</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #071829; font-family: 'Manrope', sans-serif; color: #fff; }
+    :root {
+      --e-bg:      #071829;
+      --e-bg2:     #040E1E;
+      --e-mid:     #0A1E3A;
+      --e-card:    #0C2244;
+      --e-accent:  #1E72CC;
+      --e-al:      #5BB8ED;
+      --e-all:     #A8D8F5;
+      --e-line:    rgba(30,111,192,0.22);
+      --e-muted:   rgba(255,255,255,0.58);
+    }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(22px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+  </style>
+</helmet>
+
+<div style="min-height:100vh;background:#071829;font-family:'Manrope',sans-serif;">
+
+  <!-- ══ NAV ══════════════════════════════════════════════════ -->
+  <nav style="position:fixed;top:0;left:0;right:0;height:64px;background:rgba(4,14,30,0.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);z-index:100;border-bottom:1px solid rgba(30,111,192,0.2);display:flex;align-items:center;padding:0 28px;gap:0;box-shadow:0 2px 20px rgba(0,0,0,0.5);">
+    <a href="#" onClick="{{ goHome }}" style="display:flex;align-items:center;gap:10px;text-decoration:none;margin-right:32px;flex-shrink:0;">
+      <img src="uploads/eltek/wp/wp-content/uploads/2016/09/eltek-logo.jpg" alt="ELTEK" style="height:36px;border-radius:4px;display:block;" />
+    </a>
+    <div style="display:flex;align-items:center;gap:2px;flex:1;">
+      <a href="#" onClick="{{ goHome }}" style="{{ hn }}">Home</a>
+      <a href="#" onClick="{{ goCap }}" style="{{ cn }}">Lab Capabilities</a>
+      <a href="#" onClick="{{ goTests }}" style="{{ tn }}">Tests</a>
+      <a href="#" onClick="{{ goFaq }}" style="{{ fn }}">FAQ</a>
+      <a href="#" onClick="{{ goTraining }}" style="{{ rn }}">Training</a>
+      <a href="#" onClick="{{ goContact }}" style="{{ kn }}">Contact</a>
+    </div>
+    <a href="tel:6369495835" style="flex-shrink:0;background:#1E72CC;color:#fff;font-family:'Manrope',sans-serif;font-size:0.875rem;font-weight:700;padding:9px 20px;border-radius:8px;text-decoration:none;white-space:nowrap;letter-spacing:-0.01em;">636-949-5835</a>
+  </nav>
+
+  <!-- ══════════════════════════════════════════════════════════
+       PAGE: HOME
+  ══════════════════════════════════════════════════════════════ -->
+  <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+    <!-- HERO -->
+    <section style="position:relative;min-height:88vh;display:flex;flex-direction:column;justify-content:center;padding:144px 32px 80px;overflow:hidden;">
+      <video autoplay muted loop playsinline preload="metadata" poster="uploads/eltek/video/eltek-hero-poster.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;background:#071829 url('uploads/eltek/wp/wp-content/uploads/2016/09/office-birds-eye-view.jpg') center/cover no-repeat;">
+        <source src="uploads/eltek/video/eltek-hero-background.mp4" type="video/mp4" />
+      </video>
+      <div style="position:absolute;inset:0;background:linear-gradient(160deg,rgba(2,8,20,0.76) 0%,rgba(4,14,36,0.68) 100%);z-index:1;"></div>
+      <!-- Globe wireframe decoration -->
+      <svg style="position:absolute;right:-60px;top:50%;transform:translateY(-50%);opacity:0.055;pointer-events:none;z-index:2;" width="560" height="560" viewBox="0 0 560 560" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="280" cy="280" r="240" stroke="#5BB8ED" stroke-width="1.5"/>
+        <ellipse cx="280" cy="280" rx="80" ry="240" stroke="#5BB8ED" stroke-width="1"/>
+        <ellipse cx="280" cy="280" rx="160" ry="240" stroke="#5BB8ED" stroke-width="1"/>
+        <ellipse cx="280" cy="280" rx="240" ry="80" stroke="#5BB8ED" stroke-width="1"/>
+        <ellipse cx="280" cy="280" rx="240" ry="160" stroke="#5BB8ED" stroke-width="1"/>
+        <ellipse cx="280" cy="280" rx="240" ry="38" stroke="#5BB8ED" stroke-width="1"/>
+        <line x1="280" y1="40" x2="280" y2="520" stroke="#5BB8ED" stroke-width="1"/>
+        <line x1="40" y1="280" x2="520" y2="280" stroke="#5BB8ED" stroke-width="1"/>
+      </svg>
+      <!-- Blue glow blob -->
+      <div style="position:absolute;left:-200px;bottom:-100px;width:600px;height:600px;background:radial-gradient(circle,rgba(30,114,204,0.12) 0%,transparent 70%);pointer-events:none;z-index:2;"></div>
+
+      <div style="max-width:760px;position:relative;z-index:3;animation:fadeUp 0.9s ease both;">
+        <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(30,114,204,0.18);border:1px solid rgba(91,184,237,0.35);border-radius:999px;padding:6px 16px;margin-bottom:28px;">
+          <span style="width:6px;height:6px;border-radius:50%;background:#5BB8ED;display:block;flex-shrink:0;"></span>
+          <span style="font-size:0.72rem;font-weight:700;letter-spacing:0.10em;text-transform:uppercase;color:#5BB8ED;">IAS Accredited · ISO/IEC 17025 · Testing Laboratory TL-457</span>
+        </div>
+        <h1 style="font-size:clamp(2.25rem,5vw,3.6rem);font-weight:800;letter-spacing:-0.03em;line-height:1.1;color:#fff;margin-bottom:22px;">World Leader in<br/><span style="color:#5BB8ED;">Electrical Insulation</span> Testing</h1>
+        <p style="font-size:1.1rem;line-height:1.68;color:rgba(255,255,255,0.7);max-width:600px;margin-bottom:44px;font-weight:400;">Since 1987, ELTEK International Laboratories has served Fortune 500 manufacturers and innovative businesses worldwide with expert EIM and EIS testing across a full spectrum of applications and standards.</p>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;">
+          <a href="#" onClick="{{ goContact }}" style="background:#1E72CC;color:#fff;font-family:'Manrope',sans-serif;font-weight:700;font-size:0.95rem;padding:14px 30px;border-radius:8px;text-decoration:none;letter-spacing:-0.01em;">Request a Quote</a>
+          <a href="#" onClick="{{ goCap }}" style="background:rgba(255,255,255,0.08);color:#fff;font-family:'Manrope',sans-serif;font-weight:600;font-size:0.95rem;padding:14px 30px;border-radius:8px;text-decoration:none;border:1px solid rgba(255,255,255,0.18);letter-spacing:-0.01em;">View Capabilities</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS BAR -->
+    <div style="background:#0A1E3A;border-top:1px solid rgba(30,111,192,0.25);border-bottom:1px solid rgba(30,111,192,0.15);">
+      <div style="max-width:1100px;margin:0 auto;padding:32px;display:grid;grid-template-columns:repeat(4,1fr);gap:0;">
+        <div style="text-align:center;padding:0 24px 0 0;border-right:1px solid rgba(255,255,255,0.07);">
+          <div style="font-size:2.2rem;font-weight:800;color:#5BB8ED;letter-spacing:-0.04em;line-height:1.1;">1987</div>
+          <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-top:6px;">Founded</div>
+        </div>
+        <div style="text-align:center;padding:0 24px;border-right:1px solid rgba(255,255,255,0.07);">
+          <div style="font-size:2.2rem;font-weight:800;color:#5BB8ED;letter-spacing:-0.04em;line-height:1.1;">500+</div>
+          <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-top:6px;">Individual Tests</div>
+        </div>
+        <div style="text-align:center;padding:0 24px;border-right:1px solid rgba(255,255,255,0.07);">
+          <div style="font-size:2.2rem;font-weight:800;color:#5BB8ED;letter-spacing:-0.04em;line-height:1.1;">Fortune 500</div>
+          <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-top:6px;">Clients Served</div>
+        </div>
+        <div style="text-align:center;padding:0 0 0 24px;">
+          <div style="font-size:2.2rem;font-weight:800;color:#5BB8ED;letter-spacing:-0.04em;line-height:1.1;">Global</div>
+          <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-top:6px;">Client Base</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABOUT -->
+    <section style="background:#071829;padding:88px 32px;">
+      <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;">
+        <div>
+          <div style="font-size:0.74rem;font-weight:700;letter-spacing:0.10em;text-transform:uppercase;color:#5BB8ED;margin-bottom:16px;">ABOUT ELTEK LABS</div>
+          <h2 style="font-size:clamp(1.6rem,3vw,2.3rem);font-weight:800;letter-spacing:-0.025em;color:#fff;line-height:1.2;margin-bottom:22px;">Your Single-Source Partner for Electrical Insulation Testing</h2>
+          <p style="color:rgba(255,255,255,0.65);line-height:1.72;margin-bottom:16px;font-size:1.02rem;">ELTEK Labs' customer base spans companies large and small, domestic and international — from manufacturers of individual materials to builders of complex machinery. We work collaboratively to acquire the data needed to make technically sound decisions.</p>
+          <p style="color:rgba(255,255,255,0.65);line-height:1.72;margin-bottom:32px;font-size:1.02rem;">Our facility consists of seven linked laboratories providing a single-source service: short-term performance, long-term thermal aging, compatibility, EIS thermal life, special projects, fabrication, and calibration verification.</p>
+          <a href="#" onClick="{{ goCap }}" style="color:#5BB8ED;font-family:'Manrope',sans-serif;font-weight:700;font-size:0.92rem;text-decoration:none;display:inline-flex;align-items:center;gap:6px;letter-spacing:-0.01em;">Explore Lab Capabilities →</a>
+        </div>
+        <div style="position:relative;border-radius:16px;overflow:hidden;">
+          <img src="uploads/eltek/wp/wp-content/uploads/2016/09/office-birds-eye-view.jpg" alt="ELTEK Laboratories facility" style="width:100%;height:360px;object-fit:cover;display:block;" />
+          <div style="position:absolute;inset:0;background:linear-gradient(to bottom right,rgba(7,24,41,0.15),transparent);pointer-events:none;border-radius:16px;"></div>
+          <div style="position:absolute;bottom:16px;left:16px;background:rgba(4,14,30,0.82);backdrop-filter:blur(8px);border:1px solid rgba(91,184,237,0.25);border-radius:10px;padding:10px 16px;">
+            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#5BB8ED;">St. Charles, Missouri</div>
+            <div style="font-size:0.82rem;color:rgba(255,255,255,0.7);margin-top:2px;">12 min from STL Lambert Airport</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CAPABILITIES GRID -->
+    <section style="background:#0A1E3A;padding:88px 32px;">
+      <div style="max-width:1100px;margin:0 auto;">
+        <div style="text-align:center;margin-bottom:56px;">
+          <div style="font-size:0.74rem;font-weight:700;letter-spacing:0.10em;text-transform:uppercase;color:#5BB8ED;margin-bottom:12px;">WHAT WE DO</div>
+          <h2 style="font-size:clamp(1.6rem,3vw,2.3rem);font-weight:800;letter-spacing:-0.025em;color:#fff;">Full-Spectrum Testing Capabilities</h2>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
+          <!-- Electrical -->
+          <div style="background:#0C2244;border:1px solid rgba(30,111,192,0.22);border-radius:16px;padding:28px 24px;cursor:pointer;" onClick="{{ goCap }}">
+            <div style="color:#5BB8ED;width:44px;height:44px;margin-bottom:18px;">
+              <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="24,4 11,24 22,24 20,40 33,20 22,20" fill="currentColor" fill-opacity="0.18"/>
+                <polygon points="24,4 11,24 22,24 20,40 33,20 22,20"/>
+              </svg>
+            </div>
+            <h3 style="font-size:1.05rem;font-weight:700;color:#fff;margin-bottom:10px;letter-spacing:-0.01em;">Electrical Testing</h3>
+            <p style="font-size:0.88rem;line-height:1.62;color:rgba(255,255,255,0.55);">Up to 150kV AC / 100kV DC. Dissipation factor, dielectric breakdown, insulation resistance, impulse testing, voltage endurance, and surface tracking.</p>
+          </div>
+          <!-- Thermal -->
+          <div style="background:#0C2244;border:1px solid rgba(30,111,192,0.22);border-radius:16px;padding:28px 24px;cursor:pointer;" onClick="{{ goCap }}">
+            <div style="color:#5BB8ED;width:44px;height:44px;margin-bottom:18px;">
+              <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                <path d="M22 8 L22 26 M16 32 a8 8 0 1 0 12 0" fill="currentColor" fill-opacity="0.12"/>
+                <circle cx="22" cy="33" r="7" fill="currentColor" fill-opacity="0.18"/>
+                <line x1="22" y1="8" x2="22" y2="26"/>
+                <circle cx="22" cy="33" r="7"/>
+                <line x1="27" y1="13" x2="31" y2="11"/>
+                <line x1="27" y1="19" x2="31" y2="17"/>
+              </svg>
+            </div>
+            <h3 style="font-size:1.05rem;font-weight:700;color:#fff;margin-bottom:10px;letter-spacing:-0.01em;">Thermal Exposures</h3>
+            <p style="font-size:0.88rem;line-height:1.62;color:rgba(255,255,255,0.55);">100+ laboratory ovens up to 350°C. Cold chambers down to -30°C. Three oven sizes for wide-ranging test object dimensions.</p>
+          </div>
+          <!-- Compatibility -->
+          <div style="background:#0C2244;border:1px solid rgba(30,111,192,0.22);border-radius:16px;padding:28px 24px;cursor:pointer;" onClick="{{ goCap }}">
+            <div style="color:#5BB8ED;width:44px;height:44px;margin-bottom:18px;">
+              <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="17" cy="22" r="11" fill="currentColor" fill-opacity="0.1"/>
+                <circle cx="27" cy="22" r="11" fill="currentColor" fill-opacity="0.1"/>
+                <circle cx="17" cy="22" r="11"/>
+                <circle cx="27" cy="22" r="11"/>
+              </svg>
+            </div>
+            <h3 style="font-size:1.05rem;font-weight:700;color:#fff;margin-bottom:10px;letter-spacing:-0.01em;">Compatibility Testing</h3>
+            <p style="font-size:0.88rem;line-height:1.62;color:rgba(255,255,255,0.55);">CCT / Sealed Tube testing. Immersion in oils, water, refrigerants, gases and vapor. More CCT testing performed than all other labs worldwide combined.</p>
+          </div>
+          <!-- Flammability -->
+          <div style="background:#0C2244;border:1px solid rgba(30,111,192,0.22);border-radius:16px;padding:28px 24px;cursor:pointer;" onClick="{{ goCap }}">
+            <div style="color:#5BB8ED;width:44px;height:44px;margin-bottom:18px;">
+              <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                <path d="M22 6 C17 14 11 18 11 27 C11 34 16 39 22 39 C28 39 33 34 33 27 C33 18 27 14 22 6Z" fill="currentColor" fill-opacity="0.15"/>
+                <path d="M22 6 C17 14 11 18 11 27 C11 34 16 39 22 39 C28 39 33 34 33 27 C33 18 27 14 22 6Z"/>
+                <path d="M22 22 C20 24 18 28 20 32" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <h3 style="font-size:1.05rem;font-weight:700;color:#fff;margin-bottom:10px;letter-spacing:-0.01em;">Flammability Testing</h3>
+            <p style="font-size:0.88rem;line-height:1.62;color:rgba(255,255,255,0.55);">Open flame (vertical, horizontal, needle) and non-flame sources (hot wire, glow wire). Tested per ASTM, IEC, ISO, NEMA, and UL standards.</p>
+          </div>
+          <!-- Physical -->
+          <div style="background:#0C2244;border:1px solid rgba(30,111,192,0.22);border-radius:16px;padding:28px 24px;cursor:pointer;" onClick="{{ goCap }}">
+            <div style="color:#5BB8ED;width:44px;height:44px;margin-bottom:18px;">
+              <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                <rect x="8" y="18" width="28" height="8" rx="3" fill="currentColor" fill-opacity="0.15"/>
+                <rect x="8" y="18" width="28" height="8" rx="3"/>
+                <line x1="22" y1="7" x2="22" y2="14"/>
+                <line x1="22" y1="30" x2="22" y2="37"/>
+                <polyline points="18,11 22,7 26,11"/>
+                <polyline points="18,33 22,37 26,33"/>
+              </svg>
+            </div>
+            <h3 style="font-size:1.05rem;font-weight:700;color:#fff;margin-bottom:10px;letter-spacing:-0.01em;">Physical Properties</h3>
+            <p style="font-size:0.88rem;line-height:1.62;color:rgba(255,255,255,0.55);">Tensile, flexural, compressive, and impact strength. Deformation under load, water absorption, and hardness testing per ASTM and ISO standards.</p>
+          </div>
+          <!-- Humidity -->
+          <div style="background:#0C2244;border:1px solid rgba(30,111,192,0.22);border-radius:16px;padding:28px 24px;cursor:pointer;" onClick="{{ goCap }}">
+            <div style="color:#5BB8ED;width:44px;height:44px;margin-bottom:18px;">
+              <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                <path d="M22 8 C22 8 12 20 12 29 C12 35 16 39 22 39 C28 39 32 35 32 29 C32 20 22 8 22 8Z" fill="currentColor" fill-opacity="0.15"/>
+                <path d="M22 8 C22 8 12 20 12 29 C12 35 16 39 22 39 C28 39 32 35 32 29 C32 20 22 8 22 8Z"/>
+                <line x1="16" y1="31" x2="28" y2="27" stroke-width="1.5" stroke-opacity="0.6"/>
+              </svg>
+            </div>
+            <h3 style="font-size:1.05rem;font-weight:700;color:#fff;margin-bottom:10px;letter-spacing:-0.01em;">Humidity &amp; Condensation</h3>
+            <p style="font-size:0.88rem;line-height:1.62;color:rgba(255,255,255,0.55);">Five chambers capable of up to 100% RH with visible condensation. Interior dimensions up to 1500mm wide for large test objects.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACCREDITATION -->
+    <section style="background:#071829;padding:80px 32px;border-top:1px solid rgba(30,111,192,0.1);">
+      <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;">
+        <div>
+          <div style="font-size:0.74rem;font-weight:700;letter-spacing:0.10em;text-transform:uppercase;color:#5BB8ED;margin-bottom:16px;">ACCREDITATION &amp; STANDARDS</div>
+          <h2 style="font-size:clamp(1.5rem,3vw,2.1rem);font-weight:800;letter-spacing:-0.025em;color:#fff;line-height:1.25;margin-bottom:20px;">ISO/IEC 17025 Quality Management</h2>
+          <p style="color:rgba(255,255,255,0.65);line-height:1.72;margin-bottom:16px;font-size:1.02rem;">ELTEK Labs complies with ISO/IEC 17025 as the foundation of our Quality Management System and laboratory operations. Our facility is accredited by the International Accreditation Service (IAS) as Testing Laboratory TL-457.</p>
+          <p style="color:rgba(255,255,255,0.65);line-height:1.72;margin-bottom:32px;font-size:1.02rem;">ELTEK is a Third Party Testing Laboratory for internationally recognized Certifying Bodies and remains an active participant on technical committees developing new requirements for safety and performance.</p>
+          <div style="display:flex;gap:20px;align-items:center;flex-wrap:wrap;">
+            <img src="uploads/eltek/wp/wp-content/uploads/2022/05/ELTEK_IAS_Logo_Zoomed_5-25-2022.jpg" alt="IAS Accredited" style="height:52px;border-radius:8px;display:block;" />
+            <img src="uploads/eltek/wp/wp-content/uploads/2016/09/asq-logo.png" alt="ASQ Certified" style="height:48px;display:block;" />
+          </div>
+        </div>
+        <div style="border-radius:16px;overflow:hidden;border:1px solid rgba(30,111,192,0.2);">
+          <img src="uploads/eltek/wp/wp-content/uploads/2016/07/IAS-Certificate.jpg" alt="IAS Certificate of Accreditation" style="width:100%;display:block;" />
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA BANNER -->
+    <section style="background:#0A1E3A;padding:72px 32px;border-top:1px solid rgba(30,111,192,0.18);border-bottom:1px solid rgba(30,111,192,0.12);">
+      <div style="max-width:800px;margin:0 auto;text-align:center;">
+        <h2 style="font-size:clamp(1.7rem,3vw,2.4rem);font-weight:800;letter-spacing:-0.025em;color:#fff;margin-bottom:16px;">Ready to Start a Project?</h2>
+        <p style="color:rgba(255,255,255,0.62);font-size:1.05rem;line-height:1.65;margin-bottom:36px;">Whether you need material evaluation, EIS testing, compatibility analysis, or certification support — ELTEK Labs has the expertise and the accreditation to get it done right.</p>
+        <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+          <a href="#" onClick="{{ goContact }}" style="background:#1E72CC;color:#fff;font-family:'Manrope',sans-serif;font-weight:700;font-size:0.95rem;padding:14px 32px;border-radius:8px;text-decoration:none;letter-spacing:-0.01em;">Get in Touch</a>
+          <a href="#" onClick="{{ goTests }}" style="background:rgba(255,255,255,0.08);color:#fff;font-family:'Manrope',sans-serif;font-weight:600;font-size:0.95rem;padding:14px 32px;border-radius:8px;text-decoration:none;border:1px solid rgba(255,255,255,0.16);letter-spacing:-0.01em;">Browse Tests</a>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <!-- ══════════════════════════════════════════════════════════
+       PAGE: LAB CAPABILITIES
+  ══════════════════════════════════════════════════════════════ -->
+  <sc-if value="{{ isCap }}" hint-placeholder-val="{{ false }}">
+    <div style="padding-top:64px;">
+      <!-- Page header -->
+      <section style="background:linear-gradient(160deg,#040D1E 0%,#071829 100%);padding:72px 32px 56px;border-bottom:1px solid rgba(30,111,192,0.18);">
+        <div style="max-width:1100px;margin:0 auto;">
+          <div style="font-size:0.74rem;font-weight:700;letter-spacing:0.10em;text-transform:uppercase;color:#5BB8ED;margin-bottom:14px;">OUR FACILITIES</div>
+          <h1 style="font-size:clamp(2rem,4.5vw,3.2rem);font-weight:800;letter-spacing:-0.03em;color:#fff;line-height:1.12;margin-bottom:16px;">Lab Capabilities</h1>
+          <p style="color:rgba(255,255,255,0.62);font-size:1.05rem;max-width:640px;line-height:1.65;">ELTEK Labs can evaluate materials, insulation systems, and end products for mechanical, electrical, and compatibility properties across a wide range of environments. If you don't see what you need, contact us.</p>
+        </div>
+      </section>
+
+      <div style="max-width:1100px;margin:0 auto;padding:64px 32px;">
+        <div style="display:flex;flex-direction:column;gap:48px;">
+
+          <!-- Electrical Testing -->
+          <div style="display:grid;grid-template-columns:280px 1fr;gap:48px;border-bottom:1px solid rgba(30,111,192,0.12);padding-bottom:48px;">
+            <div>
+              <div style="color:#5BB8ED;width:48px;height:48px;margin-bottom:16px;">
+                <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                  <polygon points="24,4 11,24 22,24 20,40 33,20 22,20" fill="currentColor" fill-opacity="0.18"/>
+                  <polygon points="24,4 11,24 22,24 20,40 33,20 22,20"/>
+                </svg>
+              </div>
+              <h2 style="font-size:1.4rem;font-weight:800;letter-spacing:-0.02em;color:#fff;margin-bottom:10px;">Electrical Testing</h2>
+              <p style="font-size:0.85rem;color:rgba(255,255,255,0.5);line-height:1.6;">High-voltage capability from low AC/DC up to 150kV, impulse, and endurance testing.</p>
+            </div>
+            <div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;">
+                <div style="background:#0C2244;border:1px solid rgba(30,111,192,0.2);border-radius:12px;padding:18px 20px;">
+                  <div style="font-size:1.5rem;font-weight:800;color:#5BB8ED;letter-spacing:-0.03em;">150 kV</div>
+                  <div style="font-size:0.78rem;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.45);margin-top:4px;font-weight:600;">Max AC voltage</div>
+                </div>
+                <div style="background:#0C2244;border:1px solid rgba(30,111,192,0.2);border-radius:12px;padding:18px 20px;">
+                  <div style="font-size:1.5rem;font-weight:800;color:#5BB8ED;letter-spacing:-0.03em;">100 kV</div>
+                  <div style="font-size:0.78rem;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.45);margin-top:4px;font-weight:600;">Max DC voltage</div>
+                </div>
+              </div>
+              <ul style="list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:8px 24px;">
+                <li style="font-size:0.9rem;color:rgba(255,255,255,0.65);display:flex;gap:8px;align-items:flex-start;"><span style="color:#5BB8ED;margin-top:2px;">—</span> Dissipation factor / capacitance</li>
+                <li style="font-size:0.9rem;color:rgba(255,255,255,0.65);display:flex;gap:8px;align-items:flex-start;"><span style="color:#5BB8ED;margin-top:2px;">—</span> Dielectric breakdown</li>
+                <li style="font-size:0.9rem;color:rgba(255,255,255,0.65);display:flex;gap:8px;align-items:flex-start;"><span style="color:#5BB8ED;margin-top:2px;">—</span> Insulation resistance (surface / volume)</li>
+                <li style="font-size:0.9rem;color:rgba(255,255,255,0.65);display:flex;gap:8px;align-items:flex-start;"><span style="color:#5BB8ED;margin-top:2px;">—</span> Impulse: 1.2/50µs up to 48 kV</li>
+                <li style="font-size:0.9rem;color:rgba(255,255,255,0.65);display:flex;gap:8px;align-items:flex-start;"><span style="color:#5BB8ED;margin-top:2px;">—</span> Voltage endurance / Corona resistance</li>
+                <li style="font-size:0.9rem;color:rgba(255,255,255,0.65);display:flex;gap:8px;align-items:flex-start;"><span style="color:#5BB8ED;margin-top:2px;">—</span> Surface tracking &amp; CTI</li>
+                <li style="font-size:0.9rem;color:rgba(255,255,255,0.65);display:flex;gap:8px;align-items:flex-start;"><span style="color:#5BB8ED;margin-top:2px;">—</span> Testing in water, oils, refrigerants, gases</li>
+                <li style="font-size:0.9rem;color:rgba(255,255,255,0.65);display:flex;gap:8px;align-items:flex-start;"><span style="color:#5BB8ED;margin-top:2px;">—</span> Dust-fog / inclined plane tracking</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Thermal Exposures -->
+          <div style="display:grid;grid-template-columns:280px 1fr;gap:48px;border-bottom:1px solid rgba(30,111,192,0.12);padding-bottom:48px;">
+            <div>
+              <div style="color:#5BB8ED;width:48px;height:48px;margin-bottom:16px;">
+                <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="22" y1="8" x2="22" y2="26"/><circle cx="22" cy="33" r="7" fill="currentColor" fill-opacity="0.18"/><circle cx="22" cy="33" r="7"/><line x1="27" y1="13" x2="31" y2="11"/><line x1="27" y1="19" x2="31" y2="17"/>
+                </svg>
+              </div>
+              <h2 style="font-size:1.4rem;font-weight:800;letter-spacing:-0.02em;color:#fff;margin-bottom:10px;">Thermal Exposures</h2>
+              <p style="font-size:0.85rem;color:rgba(255,255,255,0.5);line-height:1.6;">Short-term and long-term thermal conditioning with 100+ calibrated ovens and cold chambers.</p>
+            </div>
+            <div>
+              <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:24px;">
+                <div style="background:#0C2244;border:1px solid rgba(30,111,192,0.2);border-radius:12px;padding:18px 20px;">
+                  <div style="font-size:1.5rem;font-weight:800;color:#5BB8ED;letter-spacing:-0.03em;">100+</div>
+                  <div style="font-size:0.78rem;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.45);margin-top:4px;font-weight:600;">Lab ovens</div>
+                </div>
+                <div style="background:#0C2244;border:1px solid rgba(30,111,192,0.2);border-radius:12px;padding:18px 20px;">
+                  <div style="font-size:1.5rem;font-weight:800;color:#5BB8ED;letter-spacing:-0.03em;">350°C</div>
+                  <div style="font-size:0.78rem;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.45);margin-top:4px;font-weight:600;">Max heat</div>
+                </div>
+                <div style="background:#0C2244;border:1px solid rgba(30,111,192,0.2);border-radius:12px;padding:18px 20px;">
+                  <div style="font-size:1.5rem;font-weight:800;color:#5BB8ED;letter-spacing:-0.03em;">−30°C</div>
+                  <div style="font-size:0.78rem;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.45);margin-top:4px;font-weight:600;">Cold exposure</div>
+                </div>
+              </div>
+              <p style="font-size:0.9rem;color:rgba(255,255,255,0.62);line-height:1.65;">All ovens comply with IEC 60216-4-1, IEC 60216-4-2, ASTM D5374, and ASTM D5423. Three oven sizes are available (380×400×450mm up to 740×1500×1300mm) to accommodate a wide range of test object sizes.</p>
+            </div>
+          </div>
+
+          <!-- Compatibility + Flammability + Physical + Humidity -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+            <div style="background:#0C2244;border:1px solid rgba(30,111,192,0.2);border-radius:16px;padding:28px 24px;">
+              <h3 style="font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:12px;letter-spacing:-0.01em;">Compatibility Testing</h3>
+              <p style="font-size:0.88rem;color:rgba(255,255,255,0.58);line-height:1.62;margin-bottom:14px;">CCT / Sealed Tube evaluations plus immersion in various environments:</p>
+              <ul style="list-style:none;display:flex;flex-direction:column;gap:6px;">
+                <li style="font-size:0.88rem;color:rgba(255,255,255,0.62);display:flex;gap:8px;"><span style="color:#5BB8ED;">—</span> Water (tap, salt, or contaminated)</li>
+                <li style="font-size:0.88rem;color:rgba(255,255,255,0.62);display:flex;gap:8px;"><span style="color:#5BB8ED;">—</span> Oils — liquid and vapor</li>
+                <li style="font-size:0.88rem;color:rgba(255,255,255,0.62);display:flex;gap:8px;"><span style="color:#5BB8ED;">—</span> Refrigerants / gases / vapors</li>
+                <li style="font-size:0.88rem;color:rgba(255,255,255,0.62);display:flex;gap:8px;"><span style="color:#5BB8ED;">—</span> Water mists (fog)</li>
+              </ul>
+            </div>
+            <div style="background:#0C2244;border:1px solid rgba(30,111,192,0.2);border-radius:16px;padding:28px 24px;">
+              <h3 style="font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:12px;letter-spacing:-0.01em;">Flammability Testing</h3>
+              <p style="font-size:0.88rem;color:rgba(255,255,255,0.58);line-height:1.62;margin-bottom:14px;">Both flame and non-flame heat sources per ASTM, IEC, ISO, and UL:</p>
+              <ul style="list-style:none;display:flex;flex-direction:column;gap:6px;">
+                <li style="font-size:0.88rem;color:rgba(255,255,255,0.62);display:flex;gap:8px;"><span style="color:#5BB8ED;">—</span> Vertical, horizontal, needle flame</li>
+                <li style="font-size:0.88rem;color:rgba(255,255,255,0.62);display:flex;gap:8px;"><span style="color:#5BB8ED;">—</span> Hot wire &amp; glow wire ignition</li>
+                <li style="font-size:0.88rem;color:rgba(255,255,255,0.62);display:flex;gap:8px;"><span style="color:#5BB8ED;">—</span> Surface flammability — radiant heat</li>
+              </ul>
+            </div>
+            <div style="background:#0C2244;border:1px solid rgba(30,111,192,0.2);border-radius:16px;padding:28px 24px;">
+              <h3 style="font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:12px;letter-spacing:-0.01em;">Physical Properties</h3>
+              <ul style="list-style:none;display:flex;flex-direction:column;gap:6px;">
+                <li style="font-size:0.88rem;color:rgba(255,255,255,0.62);display:flex;gap:8px;"><span style="color:#5BB8ED;">—</span> Tensile, flexural, compressive strength</li>
+                <li style="font-size:0.88rem;color:rgba(255,255,255,0.62);display:flex;gap:8px;"><span style="color:#5BB8ED;">—</span> Impact strength &amp; deformation under load</li>
+                <li style="font-size:0.88rem;color:rgba(255,255,255,0.62);display:flex;gap:8px;"><span style="color:#5BB8ED;">—</span> Water absorption &amp; hardness</li>
+              </ul>
+            </div>
+            <div style="background:#0C2244;border:1px solid rgba(30,111,192,0.2);border-radius:16px;padding:28px 24px;">
+              <h3 style="font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:12px;letter-spacing:-0.01em;">Humidity &amp; Condensation</h3>
+              <ul style="list-style:none;display:flex;flex-direction:column;gap:6px;">
+                <li style="font-size:0.88rem;color:rgba(255,255,255,0.62);display:flex;gap:8px;"><span style="color:#5BB8ED;">—</span> 5 chambers, up to 100% RH</li>
+                <li style="font-size:0.88rem;color:rgba(255,255,255,0.62);display:flex;gap:8px;"><span style="color:#5BB8ED;">—</span> Visible condensation capability</li>
+                <li style="font-size:0.88rem;color:rgba(255,255,255,0.62);display:flex;gap:8px;"><span style="color:#5BB8ED;">—</span> Largest chamber: 1500mm wide</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!-- CTA -->
+      <div style="background:#0A1E3A;border-top:1px solid rgba(30,111,192,0.15);padding:52px 32px;text-align:center;">
+        <p style="color:rgba(255,255,255,0.62);font-size:1rem;margin-bottom:20px;">Don't see what you need? Contact us — we develop custom test programs to meet your specific requirements.</p>
+        <a href="#" onClick="{{ goContact }}" style="background:#1E72CC;color:#fff;font-family:'Manrope',sans-serif;font-weight:700;font-size:0.92rem;padding:13px 28px;border-radius:8px;text-decoration:none;letter-spacing:-0.01em;">Contact Us</a>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ══════════════════════════════════════════════════════════
+       PAGE: TESTS
+  ══════════════════════════════════════════════════════════════ -->
+  <sc-if value="{{ isTests }}" hint-placeholder-val="{{ false }}">
+    <div style="padding-top:64px;">
+      <section style="background:linear-gradient(160deg,#040D1E 0%,#071829 100%);padding:72px 32px 56px;border-bottom:1px solid rgba(30,111,192,0.18);">
+        <div style="max-width:1100px;margin:0 auto;">
+          <div style="font-size:0.74rem;font-weight:700;letter-spacing:0.10em;text-transform:uppercase;color:#5BB8ED;margin-bottom:14px;">TEST LIBRARY</div>
+          <h1 style="font-size:clamp(2rem,4.5vw,3.2rem);font-weight:800;letter-spacing:-0.03em;color:#fff;line-height:1.12;margin-bottom:16px;">Tests</h1>
+          <p style="color:rgba(255,255,255,0.62);font-size:1.05rem;max-width:680px;line-height:1.65;">More than 500 individual tests drawn from ASTM, IEC, ISO, NEMA, IEEE, and UL, among others. The overview below conveys the range of evaluations within ELTEK Labs' capabilities.</p>
+        </div>
+      </section>
+      <div style="max-width:1100px;margin:0 auto;padding:56px 32px;display:flex;flex-direction:column;gap:12px;">
+        <sc-for list="{{ testCats }}" as="cat" hint-placeholder-count="5">
+          <div style="border:1px solid rgba(30,111,192,0.22);border-radius:14px;overflow:hidden;background:#0C2244;">
+            <button onClick="{{ cat.toggle }}" style="width:100%;display:flex;align-items:center;justify-content:space-between;padding:22px 28px;background:transparent;border:none;cursor:pointer;text-align:left;color:#fff;">
+              <span style="font-family:'Manrope',sans-serif;font-size:1.02rem;font-weight:700;letter-spacing:-0.01em;color:#fff;">{{ cat.title }}</span>
+              <svg style="width:20px;height:20px;flex-shrink:0;color:#5BB8ED;transition:transform 0.2s;" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" xmlns="http://www.w3.org/2000/svg">
+                <polyline points="5,8 10,13 15,8"/>
+              </svg>
+            </button>
+            <sc-if value="{{ cat.isOpen }}" hint-placeholder-val="{{ false }}">
+              <div style="padding:0 28px 24px;">
+                <div style="width:100%;height:1px;background:rgba(30,111,192,0.15);margin-bottom:20px;"></div>
+                <ul style="list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:8px 32px;">
+                  <sc-for list="{{ cat.items }}" as="item" hint-placeholder-count="4">
+                    <li style="font-size:0.9rem;color:rgba(255,255,255,0.65);display:flex;gap:8px;align-items:flex-start;"><span style="color:#5BB8ED;flex-shrink:0;margin-top:1px;">—</span><span>{{ item }}</span></li>
+                  </sc-for>
+                </ul>
+              </div>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+      <div style="background:#0A1E3A;border-top:1px solid rgba(30,111,192,0.15);padding:52px 32px;text-align:center;">
+        <p style="color:rgba(255,255,255,0.62);font-size:1rem;margin-bottom:20px;">Looking for a specific test standard? Contact us for the full list or to discuss your project requirements.</p>
+        <div style="display:flex;gap:14px;justify-content:center;">
+          <a href="#" onClick="{{ goContact }}" style="background:#1E72CC;color:#fff;font-family:'Manrope',sans-serif;font-weight:700;font-size:0.92rem;padding:13px 28px;border-radius:8px;text-decoration:none;letter-spacing:-0.01em;">Request a Quote</a>
+          <a href="#" onClick="{{ goCap }}" style="background:rgba(255,255,255,0.08);color:#fff;font-family:'Manrope',sans-serif;font-weight:600;font-size:0.92rem;padding:13px 28px;border-radius:8px;text-decoration:none;border:1px solid rgba(255,255,255,0.14);letter-spacing:-0.01em;">Lab Capabilities</a>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ══════════════════════════════════════════════════════════
+       PAGE: TRAINING
+  ══════════════════════════════════════════════════════════════ -->
+  <sc-if value="{{ isTraining }}" hint-placeholder-val="{{ false }}">
+    <div style="padding-top:64px;">
+      <section style="background:linear-gradient(160deg,#040D1E 0%,#071829 100%);padding:72px 32px 56px;border-bottom:1px solid rgba(30,111,192,0.18);">
+        <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr auto;align-items:center;gap:32px;">
+          <div>
+            <div style="font-size:0.74rem;font-weight:700;letter-spacing:0.10em;text-transform:uppercase;color:#5BB8ED;margin-bottom:14px;">TEKTRACK PROGRAM</div>
+            <h1 style="font-size:clamp(2rem,4.5vw,3.2rem);font-weight:800;letter-spacing:-0.03em;color:#fff;line-height:1.12;margin-bottom:16px;">Training</h1>
+            <p style="color:rgba(255,255,255,0.62);font-size:1.05rem;max-width:640px;line-height:1.65;">Training from the world experts in electrical insulation, tailored to you. Each session agenda is developed on a per-request basis — your topics, our expertise.</p>
+          </div>
+          <img src="uploads/eltek/wp/wp-content/uploads/2017/07/Tek_Track_Logo.png" alt="TEKtrack Training" style="height:80px;display:block;" />
+        </div>
+      </section>
+
+      <section style="background:#071829;padding:72px 32px;">
+        <div style="max-width:1100px;margin:0 auto;">
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
+            <!-- In-Person -->
+            <div style="background:#0C2244;border:1px solid rgba(30,111,192,0.22);border-radius:16px;padding:32px 28px;display:flex;flex-direction:column;">
+              <div style="background:rgba(30,114,204,0.18);border:1px solid rgba(91,184,237,0.25);border-radius:10px;padding:12px;width:52px;height:52px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;color:#5BB8ED;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" style="width:24px;height:24px;">
+                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+              </div>
+              <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:#5BB8ED;margin-bottom:8px;">Best for Teams</div>
+              <h3 style="font-size:1.2rem;font-weight:800;color:#fff;letter-spacing:-0.02em;margin-bottom:8px;">In-Person Workshop</h3>
+              <div style="font-size:0.82rem;color:rgba(255,255,255,0.45);font-weight:600;margin-bottom:16px;">1–2 days · Up to 6 hrs/day</div>
+              <p style="font-size:0.9rem;line-height:1.65;color:rgba(255,255,255,0.62);flex:1;">Hands-on coverage with live demonstrations at ELTEK Labs' facility. Comprehensive discussion of your desired topics over one or two days. Includes a 1-hour catered lunch break each day.</p>
+            </div>
+            <!-- Virtual Workshop -->
+            <div style="background:#0C2244;border:1px solid rgba(91,184,237,0.35);border-radius:16px;padding:32px 28px;display:flex;flex-direction:column;position:relative;">
+              <div style="position:absolute;top:-1px;left:50%;transform:translateX(-50%);">
+                <span style="background:#1E72CC;color:#fff;font-size:0.7rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:4px 14px;border-radius:0 0 8px 8px;white-space:nowrap;">Most Popular</span>
+              </div>
+              <div style="background:rgba(30,114,204,0.18);border:1px solid rgba(91,184,237,0.25);border-radius:10px;padding:12px;width:52px;height:52px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;color:#5BB8ED;margin-top:12px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" style="width:24px;height:24px;">
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+                </svg>
+              </div>
+              <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:#5BB8ED;margin-bottom:8px;">Flexible Scheduling</div>
+              <h3 style="font-size:1.2rem;font-weight:800;color:#fff;letter-spacing:-0.02em;margin-bottom:8px;">Live Virtual Workshop</h3>
+              <div style="font-size:0.82rem;color:rgba(255,255,255,0.45);font-weight:600;margin-bottom:16px;">Half-day · Up to 4 hrs</div>
+              <p style="font-size:0.9rem;line-height:1.65;color:rgba(255,255,255,0.62);flex:1;">In-depth exploration of multiple topics in a virtual setting. Thorough discussion with limited pre-recorded demonstrations available by request.</p>
+            </div>
+            <!-- Focused Seminar -->
+            <div style="background:#0C2244;border:1px solid rgba(30,111,192,0.22);border-radius:16px;padding:32px 28px;display:flex;flex-direction:column;">
+              <div style="background:rgba(30,114,204,0.18);border:1px solid rgba(91,184,237,0.25);border-radius:10px;padding:12px;width:52px;height:52px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;color:#5BB8ED;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" style="width:24px;height:24px;">
+                  <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                </svg>
+              </div>
+              <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:#5BB8ED;margin-bottom:8px;">Quick &amp; Focused</div>
+              <h3 style="font-size:1.2rem;font-weight:800;color:#fff;letter-spacing:-0.02em;margin-bottom:8px;">Virtual Focused Seminar</h3>
+              <div style="font-size:0.82rem;color:rgba(255,255,255,0.45);font-weight:600;margin-bottom:16px;">1 hour total</div>
+              <p style="font-size:0.9rem;line-height:1.65;color:rgba(255,255,255,0.62);flex:1;">A 45-minute presentation on a specific topic followed by 15 minutes of open Q&amp;A. Ideal for targeted knowledge acquisition on a single subject.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Training photos -->
+      <section style="background:#0A1E3A;padding:64px 32px;border-top:1px solid rgba(30,111,192,0.12);">
+        <div style="max-width:1100px;margin:0 auto;">
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:40px;">
+            <img src="uploads/eltek/wp/wp-content/uploads/2017/07/UL-ELTEK-round-table-NBR-21-1024x768.jpg" alt="ELTEK Training Session" style="width:100%;height:200px;object-fit:cover;border-radius:12px;display:block;" />
+            <img src="uploads/eltek/wp/wp-content/uploads/2017/07/DSCN0241-1024x768.jpg" alt="ELTEK Training Session" style="width:100%;height:200px;object-fit:cover;border-radius:12px;display:block;" />
+            <img src="uploads/eltek/wp/wp-content/uploads/2017/07/UL-ELTEK-round-table-NBR-16-1024x768.jpg" alt="ELTEK Training Session" style="width:100%;height:200px;object-fit:cover;border-radius:12px;display:block;" />
+          </div>
+          <div style="text-align:center;">
+            <p style="color:rgba(255,255,255,0.58);font-size:0.95rem;margin-bottom:20px;">All training sessions are developed to meet your specific needs. Contact us to discuss topics and schedule.</p>
+            <a href="#" onClick="{{ goContact }}" style="background:#1E72CC;color:#fff;font-family:'Manrope',sans-serif;font-weight:700;font-size:0.92rem;padding:13px 28px;border-radius:8px;text-decoration:none;letter-spacing:-0.01em;">Request Training</a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </sc-if>
+
+  <!-- ══════════════════════════════════════════════════════════
+       PAGE: FAQ
+  ══════════════════════════════════════════════════════════════ -->
+  <sc-if value="{{ isFaq }}" hint-placeholder-val="{{ false }}">
+    <div style="padding-top:64px;">
+      <section style="background:linear-gradient(160deg,#040D1E 0%,#071829 100%);padding:72px 32px 56px;border-bottom:1px solid rgba(30,111,192,0.18);">
+        <div style="max-width:1100px;margin:0 auto;">
+          <div style="font-size:0.74rem;font-weight:700;letter-spacing:0.10em;text-transform:uppercase;color:#5BB8ED;margin-bottom:14px;">COMMON QUESTIONS</div>
+          <h1 style="font-size:clamp(2rem,4.5vw,3.2rem);font-weight:800;letter-spacing:-0.03em;color:#fff;line-height:1.12;">Frequently Asked Questions</h1>
+        </div>
+      </section>
+      <div style="max-width:800px;margin:0 auto;padding:56px 32px;display:flex;flex-direction:column;gap:10px;">
+        <sc-for list="{{ faqs }}" as="faq" hint-placeholder-count="5">
+          <div style="border:1px solid rgba(30,111,192,0.22);border-radius:14px;overflow:hidden;background:#0C2244;">
+            <button onClick="{{ faq.toggle }}" style="width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 24px;background:transparent;border:none;cursor:pointer;text-align:left;color:#fff;">
+              <span style="font-family:'Manrope',sans-serif;font-size:0.97rem;font-weight:700;color:#fff;letter-spacing:-0.01em;line-height:1.4;">{{ faq.q }}</span>
+              <svg style="width:18px;height:18px;flex-shrink:0;color:#5BB8ED;" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" xmlns="http://www.w3.org/2000/svg">
+                <polyline points="4,7 9,12 14,7"/>
+              </svg>
+            </button>
+            <sc-if value="{{ faq.isOpen }}" hint-placeholder-val="{{ false }}">
+              <div style="padding:0 24px 20px;">
+                <div style="height:1px;background:rgba(30,111,192,0.15);margin-bottom:16px;"></div>
+                <p style="font-size:0.92rem;line-height:1.68;color:rgba(255,255,255,0.68);">{{ faq.a }}</p>
+              </div>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+      <div style="background:#0A1E3A;border-top:1px solid rgba(30,111,192,0.15);padding:52px 32px;text-align:center;">
+        <p style="color:rgba(255,255,255,0.62);font-size:1rem;margin-bottom:20px;">Have a question not answered here? We're happy to help.</p>
+        <a href="#" onClick="{{ goContact }}" style="background:#1E72CC;color:#fff;font-family:'Manrope',sans-serif;font-weight:700;font-size:0.92rem;padding:13px 28px;border-radius:8px;text-decoration:none;letter-spacing:-0.01em;">Contact Us</a>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ══════════════════════════════════════════════════════════
+       PAGE: CONTACT
+  ══════════════════════════════════════════════════════════════ -->
+  <sc-if value="{{ isContact }}" hint-placeholder-val="{{ false }}">
+    <div style="padding-top:64px;">
+      <section style="background:linear-gradient(160deg,#040D1E 0%,#071829 100%);padding:72px 32px 56px;border-bottom:1px solid rgba(30,111,192,0.18);">
+        <div style="max-width:1100px;margin:0 auto;">
+          <div style="font-size:0.74rem;font-weight:700;letter-spacing:0.10em;text-transform:uppercase;color:#5BB8ED;margin-bottom:14px;">GET IN TOUCH</div>
+          <h1 style="font-size:clamp(2rem,4.5vw,3.2rem);font-weight:800;letter-spacing:-0.03em;color:#fff;line-height:1.12;margin-bottom:16px;">Contact Us</h1>
+          <p style="color:rgba(255,255,255,0.62);font-size:1.05rem;max-width:580px;line-height:1.65;">ELTEK is the world leader in EIS testing. To request a quote or discuss a project, call us or send a message below.</p>
+        </div>
+      </section>
+
+      <section style="background:#071829;padding:64px 32px;">
+        <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:340px 1fr;gap:52px;align-items:start;">
+          <!-- Contact info -->
+          <div style="display:flex;flex-direction:column;gap:24px;">
+            <div style="background:#0C2244;border:1px solid rgba(30,111,192,0.22);border-radius:16px;padding:28px 24px;">
+              <img src="uploads/eltek/wp/wp-content/uploads/2016/09/eltek-logo.jpg" alt="ELTEK" style="height:44px;border-radius:6px;margin-bottom:16px;display:block;" />
+              <p style="font-size:0.92rem;color:rgba(255,255,255,0.6);line-height:1.65;margin-bottom:20px;">The world leader in Electrical Insulation Systems (EIS) and Component Compatibility Testing — serving Fortune 500 companies and innovative businesses worldwide since 1987.</p>
+              <div style="display:flex;flex-direction:column;gap:14px;">
+                <div style="display:flex;gap:12px;align-items:flex-start;">
+                  <div style="width:32px;height:32px;background:rgba(30,114,204,0.18);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#5BB8ED;">
+                    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" xmlns="http://www.w3.org/2000/svg" style="width:16px;height:16px;">
+                      <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <div style="font-size:0.8rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:rgba(255,255,255,0.38);margin-bottom:3px;">Address</div>
+                    <div style="font-size:0.9rem;color:rgba(255,255,255,0.75);line-height:1.5;">248 Hughes Lane<br/>St. Charles, MO 63301</div>
+                  </div>
+                </div>
+                <div style="display:flex;gap:12px;align-items:center;">
+                  <div style="width:32px;height:32px;background:rgba(30,114,204,0.18);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#5BB8ED;">
+                    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" xmlns="http://www.w3.org/2000/svg" style="width:16px;height:16px;">
+                      <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <div style="font-size:0.8rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:rgba(255,255,255,0.38);margin-bottom:3px;">Phone</div>
+                    <a href="tel:6369495835" style="font-size:0.9rem;color:#5BB8ED;font-weight:600;text-decoration:none;">636-949-5835</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="background:#0C2244;border:1px solid rgba(30,111,192,0.22);border-radius:14px;padding:20px 20px;display:flex;gap:16px;align-items:center;">
+              <img src="uploads/eltek/wp/wp-content/uploads/2022/05/ELTEK_IAS_Logo_Zoomed_5-25-2022.jpg" alt="IAS Accredited" style="height:40px;border-radius:6px;display:block;flex-shrink:0;" />
+              <div>
+                <div style="font-size:0.8rem;font-weight:700;color:#fff;margin-bottom:2px;">IAS Accredited</div>
+                <div style="font-size:0.76rem;color:rgba(255,255,255,0.48);">ISO/IEC 17025 · TL-457</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact form -->
+          <div style="background:#0C2244;border:1px solid rgba(30,111,192,0.22);border-radius:20px;padding:36px 40px;">
+            <sc-if value="{{ formSent }}" hint-placeholder-val="{{ false }}">
+              <div style="text-align:center;padding:40px 20px;">
+                <div style="width:56px;height:56px;background:rgba(30,114,204,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;color:#5BB8ED;">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" style="width:26px;height:26px;"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <h3 style="font-size:1.3rem;font-weight:800;color:#fff;margin-bottom:10px;">Message Sent</h3>
+                <p style="color:rgba(255,255,255,0.6);font-size:0.95rem;line-height:1.6;">Thank you for reaching out. We'll review your inquiry and get back to you shortly.</p>
+              </div>
+            </sc-if>
+            <sc-if value="{{ formNotSent }}" hint-placeholder-val="{{ true }}">
+              <h2 style="font-size:1.3rem;font-weight:800;color:#fff;letter-spacing:-0.02em;margin-bottom:28px;">Send a Message</h2>
+              <form onSubmit="{{ handleSubmit }}" style="display:flex;flex-direction:column;gap:18px;">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+                  <div>
+                    <label style="display:block;font-size:0.78rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:7px;">Name *</label>
+                    <input type="text" placeholder="Your name" required="true" style="width:100%;background:rgba(7,24,41,0.6);border:1px solid rgba(30,111,192,0.3);border-radius:8px;padding:11px 14px;font-family:'Manrope',sans-serif;font-size:0.92rem;color:#fff;outline:none;" />
+                  </div>
+                  <div>
+                    <label style="display:block;font-size:0.78rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:7px;">Company</label>
+                    <input type="text" placeholder="Company name" style="width:100%;background:rgba(7,24,41,0.6);border:1px solid rgba(30,111,192,0.3);border-radius:8px;padding:11px 14px;font-family:'Manrope',sans-serif;font-size:0.92rem;color:#fff;outline:none;" />
+                  </div>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+                  <div>
+                    <label style="display:block;font-size:0.78rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:7px;">Email *</label>
+                    <input type="email" placeholder="you@company.com" required="true" style="width:100%;background:rgba(7,24,41,0.6);border:1px solid rgba(30,111,192,0.3);border-radius:8px;padding:11px 14px;font-family:'Manrope',sans-serif;font-size:0.92rem;color:#fff;outline:none;" />
+                  </div>
+                  <div>
+                    <label style="display:block;font-size:0.78rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:7px;">Phone</label>
+                    <input type="tel" placeholder="(000) 000-0000" style="width:100%;background:rgba(7,24,41,0.6);border:1px solid rgba(30,111,192,0.3);border-radius:8px;padding:11px 14px;font-family:'Manrope',sans-serif;font-size:0.92rem;color:#fff;outline:none;" />
+                  </div>
+                </div>
+                <div>
+                  <label style="display:block;font-size:0.78rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:7px;">Message</label>
+                  <textarea placeholder="Describe your testing needs or project requirements..." rows="5" style="width:100%;background:rgba(7,24,41,0.6);border:1px solid rgba(30,111,192,0.3);border-radius:8px;padding:11px 14px;font-family:'Manrope',sans-serif;font-size:0.92rem;color:#fff;outline:none;resize:vertical;"></textarea>
+                </div>
+                <button type="submit" style="background:#1E72CC;color:#fff;font-family:'Manrope',sans-serif;font-size:0.95rem;font-weight:700;padding:14px 28px;border-radius:8px;border:none;cursor:pointer;width:100%;letter-spacing:-0.01em;transition:background 0.2s;">Submit Message</button>
+              </form>
+            </sc-if>
+          </div>
+        </div>
+      </section>
+    </div>
+  </sc-if>
+
+  <!-- ══ FOOTER ══════════════════════════════════════════════ -->
+  <footer style="background:#040E1E;border-top:1px solid rgba(30,111,192,0.15);padding:52px 32px 28px;">
+    <div style="max-width:1100px;margin:0 auto;">
+      <div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px;margin-bottom:44px;">
+        <div>
+          <img src="uploads/eltek/wp/wp-content/uploads/2016/09/eltek-logo.jpg" alt="ELTEK" style="height:36px;border-radius:4px;margin-bottom:16px;display:block;" />
+          <p style="font-size:0.88rem;color:rgba(255,255,255,0.48);line-height:1.65;max-width:320px;margin-bottom:20px;">World leader in EIM and EIS testing since 1987. ISO/IEC 17025 accredited. 248 Hughes Lane, St. Charles, MO 63301.</p>
+          <a href="tel:6369495835" style="color:#5BB8ED;font-size:0.9rem;font-weight:700;text-decoration:none;letter-spacing:-0.01em;">636-949-5835</a>
+        </div>
+        <div>
+          <div style="font-size:0.74rem;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:16px;">Navigation</div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <a href="#" onClick="{{ goHome }}" style="color:rgba(255,255,255,0.58);font-size:0.88rem;text-decoration:none;font-weight:500;">Home</a>
+            <a href="#" onClick="{{ goCap }}" style="color:rgba(255,255,255,0.58);font-size:0.88rem;text-decoration:none;font-weight:500;">Lab Capabilities</a>
+            <a href="#" onClick="{{ goTests }}" style="color:rgba(255,255,255,0.58);font-size:0.88rem;text-decoration:none;font-weight:500;">Tests</a>
+            <a href="#" onClick="{{ goFaq }}" style="color:rgba(255,255,255,0.58);font-size:0.88rem;text-decoration:none;font-weight:500;">FAQ</a>
+            <a href="#" onClick="{{ goTraining }}" style="color:rgba(255,255,255,0.58);font-size:0.88rem;text-decoration:none;font-weight:500;">Training</a>
+            <a href="#" onClick="{{ goContact }}" style="color:rgba(255,255,255,0.58);font-size:0.88rem;text-decoration:none;font-weight:500;">Contact</a>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:0.74rem;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:16px;">Accreditation</div>
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <img src="uploads/eltek/wp/wp-content/uploads/2022/05/ELTEK_IAS_Logo_Zoomed_5-25-2022.jpg" alt="IAS Accredited" style="height:40px;border-radius:6px;display:block;" />
+            <img src="uploads/eltek/wp/wp-content/uploads/2016/09/asq-logo.png" alt="ASQ" style="height:36px;display:block;" />
+          </div>
+        </div>
+      </div>
+      <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:20px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+        <p style="font-size:0.78rem;color:rgba(255,255,255,0.3);">Copyright © 2026 · All content owned by ELTEK International Laboratories.</p>
+        <p style="font-size:0.78rem;color:rgba(255,255,255,0.25);">St. Charles, MO · 12 min from STL Lambert Airport</p>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { page: 'home', openIdx: -1, formSent: false };
+
+  goHome = (e) => { if (e) e.preventDefault(); this.setState({ page: 'home', openIdx: -1 }); window.scrollTo(0, 0); };
+  goCap  = (e) => { if (e) e.preventDefault(); this.setState({ page: 'cap',   openIdx: -1 }); window.scrollTo(0, 0); };
+  goTests= (e) => { if (e) e.preventDefault(); this.setState({ page: 'tests', openIdx: -1 }); window.scrollTo(0, 0); };
+  goFaq  = (e) => { if (e) e.preventDefault(); this.setState({ page: 'faq',   openIdx: -1 }); window.scrollTo(0, 0); };
+  goTraining = (e) => { if (e) e.preventDefault(); this.setState({ page: 'training', openIdx: -1 }); window.scrollTo(0, 0); };
+  goContact  = (e) => { if (e) e.preventDefault(); this.setState({ page: 'contact',  openIdx: -1 }); window.scrollTo(0, 0); };
+
+  toggle = (i) => (e) => {
+    if (e) e.preventDefault();
+    this.setState(s => ({ openIdx: s.openIdx === i ? -1 : i }));
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.setState({ formSent: true });
+  };
+
+  renderVals() {
+    const { page, openIdx, formSent } = this.state;
+
+    const ns = (p) => ({
+      fontFamily: "'Manrope', sans-serif",
+      fontSize: '0.875rem',
+      fontWeight: page === p ? '700' : '500',
+      color: page === p ? '#5BB8ED' : 'rgba(255,255,255,0.65)',
+      background: page === p ? 'rgba(30,114,204,0.16)' : 'transparent',
+      padding: '7px 13px',
+      borderRadius: '8px',
+      textDecoration: 'none',
+      cursor: 'pointer',
+      transition: 'color 0.18s',
+      display: 'inline-block',
+      whiteSpace: 'nowrap',
+      letterSpacing: '-0.01em',
+    });
+
+    const faqData = [
+      { q: 'Where is ELTEK Labs located?',
+        a: '248 Hughes Lane, St. Charles, MO 63301 — approximately 12 minutes from St. Louis Lambert International Airport.' },
+      { q: 'How long has ELTEK been in business?',
+        a: 'Since 1987 — nearly four decades of earning and maintaining the worldwide reputation as experts in EIM and EIS testing.' },
+      { q: 'What testing standards does ELTEK comply with?',
+        a: 'ASTM, IEC, ISO, NEMA, IEEE, UL, and many others. ELTEK is also an active participant on technical committees developing new requirements.' },
+      { q: 'Does ELTEK serve international clients?',
+        a: "Yes. ELTEK's client base is global, including Fortune 500 companies and businesses of all sizes in the worldwide electro-technical industry." },
+      { q: 'What is an Electrical Insulation System (EIS)?',
+        a: 'An EIS is the complete assembly of insulating materials used in a device such as a motor, generator, or transformer. ELTEK evaluates EIS for thermal life, compatibility, and performance.' },
+      { q: 'What is Component Compatibility Testing (CCT)?',
+        a: "CCT evaluates how individual insulation components interact when combined, identifying chemical reactions or degradation that could affect system lifespan. ELTEK has conducted more CCT than all other laboratories worldwide combined." },
+      { q: 'Can ELTEK assist with certifying body submissions?',
+        a: 'Yes. ELTEK is a Third Party Testing Laboratory for internationally recognized Certifying Bodies and handles both the technical testing and administrative requirements of the certification process.' },
+      { q: 'How do I start a project?',
+        a: "Call 636-949-5835 or use the Contact page. We'll discuss your needs and develop a customized testing program drawing from nationally and internationally recognized standards." },
+    ];
+
+    const faqs = faqData.map((item, i) => ({
+      ...item,
+      isOpen: openIdx === i,
+      toggle: this.toggle(i),
+    }));
+
+    const testCatData = [
+      { title: 'Mechanical Strength & Endurance',
+        items: ['Tensile strength', 'Flexural strength', 'Compression strength', 'Impact strength', 'Adhesion to metal substrates', 'Tear resistance', 'Long-Term Thermal Aging (LTTA)'] },
+      { title: 'Electrical Insulation Performance',
+        items: ['Dissipation factor', 'Dielectric constant / capacitance', 'Dielectric breakdown', 'Insulation resistance — surface and/or volume', 'Arc tracking', 'Impulse voltage withstand', 'Voltage endurance (Corona)', 'Surface tracking / Comparative Tracking Index (CTI)', 'Complex environmental exposure / Dust fog', 'Inclined plane tracking', 'Long-Term Thermal Aging (LTTA)'] },
+      { title: 'Compatibility of Materials or Systems',
+        items: ['Exposure to oils in liquid and vapor environments', 'Exposure to water (tap, salt, or contaminated)', 'Exposure to direct contact with material components', 'Component Compatibility Testing (CCT) / Sealed Tubes'] },
+      { title: 'Flammability',
+        items: ['Hot wire ignition', 'Glow wire ignition (non-flame sources)', 'Open flame — vertical, horizontal, thin materials, needle flame', 'Surface flammability — radiant heat'] },
+      { title: 'Ratings of Materials & Systems',
+        items: ['Thermal ratings', 'Electrical endurance', 'Multifactor evaluations', 'Papers, films, composite flexible sheets', 'Rigid sheets / pressboards, tapes, sleeving, tubing', 'Powder coatings / busbars / magnet wire insulation', 'Rotating machinery (motors, generators)', 'Coils — transformers and magnetic coils', 'Low voltage (up to 1 kV) and high voltage (over 1 kV) applications', 'Multifactor EIS evaluations', 'Modifications and substitutions to established EIS'] },
+    ];
+
+    const testCats = testCatData.map((cat, i) => ({
+      ...cat,
+      isOpen: openIdx === (i + 20),
+      toggle: this.toggle(i + 20),
+    }));
+
+    return {
+      isHome:     page === 'home',
+      isCap:      page === 'cap',
+      isTests:    page === 'tests',
+      isFaq:      page === 'faq',
+      isTraining: page === 'training',
+      isContact:  page === 'contact',
+      hn: ns('home'),
+      cn: ns('cap'),
+      tn: ns('tests'),
+      fn: ns('faq'),
+      rn: ns('training'),
+      kn: ns('contact'),
+      goHome:     this.goHome,
+      goCap:      this.goCap,
+      goTests:    this.goTests,
+      goFaq:      this.goFaq,
+      goTraining: this.goTraining,
+      goContact:  this.goContact,
+      faqs,
+      testCats,
+      formSent,
+      formNotSent: !formSent,
+      handleSubmit: this.handleSubmit,
+    };
+  }
+}
+</script>
+</body>
+</html>
