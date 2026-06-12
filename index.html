@@ -792,5 +792,32 @@ class Component extends DCLogic {
   }
 }
 </script>
+<script>
+  (function() {
+    function tryPlayVideos() {
+      var videos = document.querySelectorAll('video[autoplay]');
+      videos.forEach(function(video) {
+        if (video.paused) {
+          video.play().catch(function(err) {
+            // Silence autoplay rejection errors
+            console.log("Autoplay waiting for user interaction or loading...", err);
+          });
+        }
+      });
+    }
+    tryPlayVideos();
+    setInterval(tryPlayVideos, 1000);
+    var interactEvents = ['click', 'touchstart', 'mousedown', 'keydown'];
+    function playOnInteract() {
+      tryPlayVideos();
+      interactEvents.forEach(function(ev) {
+        document.removeEventListener(ev, playOnInteract);
+      });
+    }
+    interactEvents.forEach(function(ev) {
+      document.addEventListener(ev, playOnInteract, { passive: true });
+    });
+  })();
+</script>
 </body>
 </html>
