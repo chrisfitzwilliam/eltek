@@ -664,18 +664,22 @@
               <h2>Send a message</h2>
               <form onSubmit="{{ handleSubmit }}">
                 <div class="form-grid">
-                  <div><label>Name *</label><input type="text" placeholder="Your name" required="true" /></div>
-                  <div><label>Company</label><input type="text" placeholder="Company name" /></div>
+                  <div><label>Name *</label><input type="text" name="name" placeholder="Your name" required="true" maxlength="100" /></div>
+                  <div><label>Company</label><input type="text" name="company" placeholder="Company name" maxlength="150" /></div>
                 </div>
                 <div class="form-grid">
-                  <div><label>Email *</label><input type="email" placeholder="you@company.com" required="true" /></div>
-                  <div><label>Phone</label><input type="tel" placeholder="(000) 000-0000" /></div>
+                  <div><label>Email *</label><input type="email" name="email" placeholder="you@company.com" required="true" maxlength="200" /></div>
+                  <div><label>Phone</label><input type="tel" name="phone" placeholder="(000) 000-0000" maxlength="40" /></div>
                 </div>
                 <div style="margin-bottom:20px;">
                   <label>Message</label>
-                  <textarea placeholder="Describe your testing needs or project requirements" rows="5"></textarea>
+                  <textarea name="message" placeholder="Describe your testing needs or project requirements" rows="5" maxlength="4000"></textarea>
                 </div>
-                <button type="submit" class="btn">Submit message</button>
+                <div style="position:absolute;left:-9999px;" aria-hidden="true"><input type="text" name="website" tabindex="-1" autocomplete="off" /></div>
+                <sc-if value="{{ formError }}" hint-placeholder-val="{{ false }}">
+                  <p style="color:#B3380D;margin:0 0 14px;">Sorry, your message could not be sent. Please try again, or call 636-949-5835.</p>
+                </sc-if>
+                <button type="submit" class="btn">{{ formBtnLabel }}</button>
               </form>
             </sc-if>
           </div>
@@ -723,7 +727,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { page: 'home', openIdx: -1, formSent: false };
+  state = { page: 'home', openIdx: -1, formSent: false, formSending: false, formError: false };
 
   goHome = (e) => { if (e) e.preventDefault(); this.setState({ page: 'home', openIdx: -1 }); window.scrollTo(0, 0); };
   goCap  = (e) => { if (e) e.preventDefault(); this.setState({ page: 'cap',   openIdx: -1 }); window.scrollTo(0, 0); };
@@ -739,11 +743,29 @@ class Component extends DCLogic {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.setState({ formSent: true });
+    if (this.state.formSending) return;
+    const f = e.target;
+    const val = (n) => (f.elements[n] ? f.elements[n].value : '');
+    const payload = {
+      name: val('name'), company: val('company'), email: val('email'),
+      phone: val('phone'), message: val('message'), website: val('website'),
+    };
+    this.setState({ formSending: true, formError: false });
+    fetch('https://eltek-contact.cl1p-worker.workers.dev', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    })
+      .then((r) => r.json().then((j) => ({ ok: r.ok && j.ok })))
+      .catch(() => ({ ok: false }))
+      .then((res) => {
+        if (res.ok) this.setState({ formSent: true, formSending: false, formError: false });
+        else this.setState({ formSending: false, formError: true });
+      });
   };
 
   renderVals() {
-    const { page, openIdx, formSent } = this.state;
+    const { page, openIdx, formSent, formSending, formError } = this.state;
 
     const ns = (p) => ({
       color: page === p ? '#fff' : 'rgba(255,255,255,0.68)',
@@ -818,6 +840,8 @@ class Component extends DCLogic {
       faqs,
       testCats,
       formSent,
+      formError,
+      formBtnLabel: formSending ? 'Sending…' : 'Submit message',
       formNotSent: !formSent,
       handleSubmit: this.handleSubmit,
     };
