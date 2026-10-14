@@ -65,7 +65,8 @@ def head_block(cfg, route):
             '<meta name="robots" content="noindex">',
         ]
         if cfg.get("favicon"):
-            lines.append('<link rel="icon" href="%s" sizes="16x16">' % esc(cfg["favicon"]))
+            lines.append('<link rel="icon" href="%s" sizes="any">' % esc(cfg["favicon"]))
+            lines.append('<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png">')
         return "\n".join(lines) + "\n"
     url = site + route["path"]
     img = cfg["ogImage"]
@@ -76,7 +77,8 @@ def head_block(cfg, route):
         '<link rel="canonical" href="%s">' % esc(url),
     ]
     if cfg.get("favicon"):
-        lines.append('<link rel="icon" href="%s" sizes="16x16">' % esc(cfg["favicon"]))
+        lines.append('<link rel="icon" href="%s" sizes="any">' % esc(cfg["favicon"]))
+        lines.append('<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png">')
     lines += [
         '<meta property="og:type" content="website">',
         '<meta property="og:site_name" content="%s">' % esc(cfg["siteName"]),

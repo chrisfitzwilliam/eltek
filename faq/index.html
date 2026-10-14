@@ -9,7 +9,8 @@
 <title>FAQ | ELTEK International Laboratories</title>
 <meta name="description" content="Answers about ELTEK International Laboratories: location, testing since 1987, standards, EIS and CCT testing, certifying body submissions and starting a project.">
 <link rel="canonical" href="https://elteklabs.com/faq/">
-<link rel="icon" href="/favicon.ico" sizes="16x16">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ELTEK International Laboratories">
 <meta property="og:locale" content="en_US">
@@ -157,7 +158,7 @@
     .ph { position: relative; color: #fff; background: var(--ink); overflow: hidden; }
     .ph > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
     .ph-scrim { position: absolute; inset: 0; background: rgba(12,13,15,0.62); }
-    .ph-body { position: relative; padding: clamp(56px, 9vw, 112px) 0 clamp(36px, 5vw, 56px); }
+    .ph-body { position: relative; padding-top: clamp(56px, 9vw, 112px); padding-bottom: clamp(36px, 5vw, 56px); }
     .ph h1 { font-weight: 800; font-size: clamp(3rem, 8.5vw, 7rem); line-height: 0.9; }
     .ph p { max-width: 58ch; margin-top: 22px; font-size: 1.12rem; color: rgba(255,255,255,0.88); }
     .ph-plain { background: var(--ink); }
@@ -624,17 +625,17 @@
           <div class="tr">
             <div>
               <div class="when mono">1–2 days · up to 6 hrs/day</div>
-              <h3>In-person workshop</h3>
+              <h3 role="heading" aria-level="2">In-person workshop</h3>
               <p>Hands-on coverage with live demonstrations at the ELTEK facility. A comprehensive discussion of your chosen topics over one or two days, including a one-hour catered lunch each day.</p>
             </div>
             <div>
               <div class="when mono">Half day · up to 4 hrs</div>
-              <h3>Live virtual workshop</h3>
+              <h3 role="heading" aria-level="2">Live virtual workshop</h3>
               <p>In-depth exploration of multiple topics online. Thorough discussion, with limited pre-recorded demonstrations available on request.</p>
             </div>
             <div>
               <div class="when mono">1 hour total</div>
-              <h3>Virtual focused seminar</h3>
+              <h3 role="heading" aria-level="2">Virtual focused seminar</h3>
               <p>A 45-minute presentation on one topic followed by 15 minutes of open Q&amp;A. Suited to targeted knowledge on a single subject.</p>
             </div>
           </div>
@@ -733,16 +734,16 @@
               <h2>Send a message</h2>
               <form onSubmit="{{ handleSubmit }}">
                 <div class="form-grid">
-                  <div><label>Name *</label><input type="text" name="name" placeholder="Your name" required="true" maxlength="100" /></div>
-                  <div><label>Company</label><input type="text" name="company" placeholder="Company name" maxlength="150" /></div>
+                  <div><label for="f-name">Name *</label><input id="f-name" type="text" name="name" placeholder="Your name" required="true" maxlength="100" /></div>
+                  <div><label for="f-company">Company</label><input id="f-company" type="text" name="company" placeholder="Company name" maxlength="150" /></div>
                 </div>
                 <div class="form-grid">
-                  <div><label>Email *</label><input type="email" name="email" placeholder="you@company.com" required="true" maxlength="200" /></div>
-                  <div><label>Phone</label><input type="tel" name="phone" placeholder="(000) 000-0000" maxlength="40" /></div>
+                  <div><label for="f-email">Email *</label><input id="f-email" type="email" name="email" placeholder="you@company.com" required="true" maxlength="200" /></div>
+                  <div><label for="f-phone">Phone</label><input id="f-phone" type="tel" name="phone" placeholder="(000) 000-0000" maxlength="40" /></div>
                 </div>
                 <div style="margin-bottom:20px;">
-                  <label>Message</label>
-                  <textarea name="message" placeholder="Describe your testing needs or project requirements" rows="5" maxlength="4000"></textarea>
+                  <label for="f-message">Message</label>
+                  <textarea id="f-message" name="message" placeholder="Describe your testing needs or project requirements" rows="5" maxlength="4000"></textarea>
                 </div>
                 <div style="position:absolute;left:-9999px;" aria-hidden="true"><input type="text" name="website" tabindex="-1" autocomplete="off" /></div>
                 <sc-if value="{{ formError }}" hint-placeholder-val="{{ false }}">
@@ -834,8 +835,8 @@
   "ogImage": { "path": "/uploads/eltek/video/eltek-hero-poster.jpg", "width": 1280, "height": 720, "alt": "Test electrodes on an insulation specimen in the ELTEK laboratory" },
   "routes": [
     { "page": "home", "path": "/", "nav": "Home",
-      "title": "ELTEK International Laboratories | Electrical Insulation Testing",
-      "description": "IAS-accredited ISO/IEC 17025 testing laboratory in St. Charles, Missouri. Electrical insulation systems, thermal aging, compatibility, flammability and physical testing since 1987." },
+      "title": "ELTEK International Laboratories | Insulation Testing",
+      "description": "IAS-accredited ISO/IEC 17025 testing laboratory in St. Charles, MO. Electrical insulation, thermal aging, compatibility, flammability and physical testing." },
     { "page": "cap", "path": "/lab-capabilities/", "nav": "Lab Capabilities",
       "title": "Lab Capabilities | ELTEK International Laboratories",
       "description": "Electrical testing to 150 kV AC, 100+ calibrated ovens to 350 °C, plus physical, compatibility, flammability and humidity testing at ELTEK in St. Charles, MO." },
@@ -859,7 +860,8 @@
   "legacy": [
     { "from": "/test-capabilities/", "to": "/lab-capabilities/" },
     { "from": "/about/faq/", "to": "/faq/" },
-    { "from": "/request-a-quote-now/", "to": "/contact/" }
+    { "from": "/request-a-quote-now/", "to": "/contact/" },
+    { "from": "/about/", "to": "/" }
   ],
   "organization": {
     "type": "LocalBusiness",
@@ -921,7 +923,6 @@ function eltekApplyRoute(page, push) {
   if (robots) robots.remove();
 }
 
-if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 
 class Component extends DCLogic {
   state = { page: eltekPageFromPath(location.pathname), openIdx: -1, formSent: false, formSending: false, formError: false };
