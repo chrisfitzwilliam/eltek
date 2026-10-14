@@ -24,7 +24,8 @@
       --steel:  #2A2F35;
       --mute:   #5A5F66;
       --rule:   rgba(21,23,26,0.22);
-      --accent: #E8531D;
+      --accent: #0E6B5C;
+      --accent-lt: #4FC3A5;
       --nav-h:  68px;
       --pad:    clamp(20px, 4vw, 56px);
       --max:    1240px;
@@ -42,16 +43,16 @@
     h1, h2, h3, .cond { font-family: 'Barlow Condensed', sans-serif; text-transform: uppercase; letter-spacing: 0.005em; line-height: 0.96; }
 
     /* nav */
-    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: var(--ink); color: #fff; display: flex; align-items: stretch; height: var(--nav-h); border-bottom: 4px solid var(--accent); }
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: var(--ink); color: #fff; display: flex; align-items: stretch; height: var(--nav-h); border-bottom: 4px solid var(--accent-lt); }
     .nav-logo { background: var(--white); display: flex; align-items: center; padding: 0 20px; flex-shrink: 0; }
     .nav-logo img { height: 34px; display: block; }
     .nav-links { display: flex; align-items: stretch; flex: 1; padding-left: 12px; overflow-x: auto; scrollbar-width: none; }
     .nav-links::-webkit-scrollbar { display: none; }
     .nav-links a { font-family: 'Barlow Condensed', sans-serif; font-size: 1.15rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; padding: 0 16px; text-decoration: none; cursor: pointer; display: flex; align-items: center; white-space: nowrap; }
-    .nav-tel { display: flex; align-items: center; padding: 0 26px; background: var(--accent); color: var(--ink); text-decoration: none; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.35rem; letter-spacing: 0.02em; flex-shrink: 0; }
+    .nav-tel { display: flex; align-items: center; padding: 0 26px; background: var(--accent-lt); color: var(--ink); text-decoration: none; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.35rem; letter-spacing: 0.02em; flex-shrink: 0; }
 
     /* buttons */
-    .btn { display: inline-block; background: var(--accent); color: var(--ink); font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.15rem; text-transform: uppercase; letter-spacing: 0.06em; padding: 15px 30px; text-decoration: none; border: 2px solid var(--accent); cursor: pointer; }
+    .btn { display: inline-block; background: var(--accent); color: #fff; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.15rem; text-transform: uppercase; letter-spacing: 0.06em; padding: 15px 30px; text-decoration: none; border: 2px solid var(--accent); cursor: pointer; }
     .btn:hover { background: var(--ink); border-color: var(--ink); color: #fff; }
     .btn-line { background: transparent; color: inherit; border-color: currentColor; }
     .btn-line:hover { background: #fff; border-color: #fff; color: var(--ink); }
@@ -59,9 +60,12 @@
     .arrow-link { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.15rem; text-transform: uppercase; letter-spacing: 0.06em; text-decoration: none; border-bottom: 3px solid var(--accent); padding-bottom: 2px; display: inline-block; cursor: pointer; }
 
     /* hero */
-    .hero { position: relative; min-height: 86vh; display: flex; align-items: flex-end; color: #fff; overflow: hidden; background: var(--ink) url(uploads/eltek/video/eltek-hero-poster.jpg) 50% 0 / cover no-repeat; }
+    .hero { position: relative; min-height: 86vh; display: flex; align-items: flex-end; color: #fff; overflow: hidden; background: var(--ink); }
+    .hero::before { content: ''; position: absolute; left: 0; top: 0; width: 100%; height: 116%; background: url(uploads/eltek/video/eltek-hero-poster.jpg) 50% 0 / cover no-repeat; }
     .hero video { position: absolute; left: 0; top: 0; width: 100%; height: 116%; object-fit: cover; object-position: 50% 0; opacity: 0; transition: opacity 0.8s ease; }
     .hero video.is-playing { opacity: 1; }
+    .hero .btn:not(.btn-line) { background: var(--accent-lt); border-color: var(--accent-lt); color: var(--ink); }
+    .hero .btn:not(.btn-line):hover { background: #fff; border-color: #fff; color: var(--ink); }
     .hero-scrim { position: absolute; inset: 0; background: rgba(12,13,15,0.58); }
     .hero-body { position: relative; width: 100%; padding-top: 140px; padding-bottom: clamp(40px, 7vw, 88px); }
     .hero h1 { font-weight: 800; font-size: clamp(3.4rem, 10.5vw, 9.2rem); line-height: 0.88; max-width: 12ch; }
@@ -74,7 +78,7 @@
     .spec-cell { padding: 26px 18px 24px 0; border-right: 1px solid rgba(255,255,255,0.2); margin-right: 18px; }
     .spec-cell:last-child { border-right: 0; margin-right: 0; }
     .spec-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: clamp(2.1rem, 3.6vw, 3.1rem); line-height: 1; }
-    .spec-num small { font-size: 0.5em; color: var(--accent); margin-left: 3px; }
+    .spec-num small { font-size: 0.5em; color: var(--accent-lt); margin-left: 3px; }
     .spec-lbl { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.6); margin-top: 8px; }
 
     /* generic sections */
@@ -121,7 +125,7 @@
     .logo-tile img { height: 44px; width: auto; display: block; }
 
     /* cta */
-    .cta { background: var(--accent); color: var(--ink); padding: clamp(44px, 6vw, 72px) 0; }
+    .cta { background: var(--accent); color: #fff; padding: clamp(44px, 6vw, 72px) 0; }
     .cta .wrap { display: flex; align-items: center; justify-content: space-between; gap: 28px; flex-wrap: wrap; }
     .cta h2 { font-weight: 800; font-size: clamp(2.2rem, 5vw, 4rem); max-width: 16ch; }
     .cta .btn { background: var(--ink); border-color: var(--ink); color: #fff; }
@@ -202,16 +206,16 @@
     .sent h3 { font-weight: 800; font-size: 2.6rem; margin-bottom: 12px; }
 
     /* footer */
-    .foot { background: var(--ink); color: #fff; padding: 64px 0 28px; border-top: 4px solid var(--accent); }
+    .foot { background: var(--ink); color: #fff; padding: 64px 0 28px; border-top: 4px solid var(--accent-lt); }
     .foot-grid { display: grid; grid-template-columns: 5fr 3fr 4fr; gap: 40px; padding-bottom: 44px; }
     .foot-logo { display: inline-block; background: var(--white); padding: 10px 14px; }
     .foot-logo img { height: 38px; display: block; }
     .foot p { color: rgba(255,255,255,0.72); font-size: 0.96rem; max-width: 36ch; margin: 18px 0; }
-    .foot-tel { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.8rem; text-decoration: none; color: var(--accent); }
+    .foot-tel { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.8rem; text-decoration: none; color: var(--accent-lt); }
     .foot h4 { font-family: 'Barlow Condensed', sans-serif; text-transform: uppercase; letter-spacing: 0.08em; font-size: 1rem; color: rgba(255,255,255,0.55); margin-bottom: 14px; font-weight: 600; }
     .foot-nav { display: flex; flex-direction: column; gap: 9px; }
     .foot-nav a { color: #fff; text-decoration: none; cursor: pointer; font-size: 1rem; }
-    .foot-nav a:hover { color: var(--accent); }
+    .foot-nav a:hover { color: var(--accent-lt); }
     .foot .logos { margin-top: 0; }
     .foot-base { border-top: 1px solid rgba(255,255,255,0.2); padding-top: 18px; display: flex; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; font-size: 0.85rem; color: rgba(255,255,255,0.55); }
 
@@ -677,7 +681,7 @@
                 </div>
                 <div style="position:absolute;left:-9999px;" aria-hidden="true"><input type="text" name="website" tabindex="-1" autocomplete="off" /></div>
                 <sc-if value="{{ formError }}" hint-placeholder-val="{{ false }}">
-                  <p style="color:#B3380D;margin:0 0 14px;">Sorry, your message could not be sent. Please try again, or call 636-949-5835.</p>
+                  <p style="color:#A32020;margin:0 0 14px;">Sorry, your message could not be sent. Please try again, or call 636-949-5835.</p>
                 </sc-if>
                 <button type="submit" class="btn">{{ formBtnLabel }}</button>
               </form>
@@ -769,7 +773,7 @@ class Component extends DCLogic {
 
     const ns = (p) => ({
       color: page === p ? '#fff' : 'rgba(255,255,255,0.68)',
-      borderBottom: page === p ? '4px solid #E8531D' : '4px solid transparent',
+      borderBottom: page === p ? '4px solid #4FC3A5' : '4px solid transparent',
     });
 
     const faqData = [
