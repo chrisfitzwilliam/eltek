@@ -24,8 +24,8 @@
       --steel:  #2A2F35;
       --mute:   #5A5F66;
       --rule:   rgba(21,23,26,0.22);
-      --accent: #0E6B5C;
-      --accent-lt: #4FC3A5;
+      --accent: #263A8A;
+      --accent-lt: #8EB0E6;
       --nav-h:  68px;
       --pad:    clamp(20px, 4vw, 56px);
       --max:    1240px;
@@ -130,8 +130,8 @@
     .cta h2 { font-weight: 800; font-size: clamp(2.2rem, 5vw, 4rem); max-width: 16ch; }
     .cta .btn { background: var(--ink); border-color: var(--ink); color: #fff; }
     .cta .btn:hover { background: #fff; border-color: #fff; color: var(--ink); }
-    .cta .btn-line { background: transparent; color: var(--ink); border-color: var(--ink); }
-    .cta .btn-line:hover { background: var(--ink); color: #fff; }
+    .cta .btn-line { background: transparent; color: #fff; border-color: #fff; }
+    .cta .btn-line:hover { background: #fff; border-color: #fff; color: var(--ink); }
 
     /* page header */
     .ph { position: relative; color: #fff; background: var(--ink); overflow: hidden; }
@@ -773,7 +773,7 @@ class Component extends DCLogic {
 
     const ns = (p) => ({
       color: page === p ? '#fff' : 'rgba(255,255,255,0.68)',
-      borderBottom: page === p ? '4px solid #4FC3A5' : '4px solid transparent',
+      borderBottom: page === p ? '4px solid #8EB0E6' : '4px solid transparent',
     });
 
     const faqData = [
