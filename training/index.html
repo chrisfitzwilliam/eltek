@@ -33,7 +33,7 @@
 <helmet>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -237,6 +237,51 @@
     .foot-nav a { color: #fff; text-decoration: none; cursor: pointer; font-size: 1rem; }
     .foot-nav a:hover { color: var(--accent-lt); }
     .foot .logos { margin-top: 0; }
+    .foot-credit { text-align: center; margin-top: 32px; padding-bottom: 20px; }
+    @keyframes lli-credit-border-shift {
+      0%, 100% { background-position: 0% 50%; }
+      50%      { background-position: 100% 50%; }
+    }
+    .lli-credit {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 6px 16px 6px 6px;
+      border-radius: 999px;
+      background: #05070a;
+      position: relative;
+      border: 1.5px solid transparent;
+      background-image: linear-gradient(#05070a, #05070a),
+                        linear-gradient(115deg,
+                          rgba(0,102,255,0.55) 0%,
+                          rgba(110,55,210,0.30) 38%,
+                          rgba(255,138,0,0.55) 68%,
+                          rgba(0,102,255,0.55) 100%);
+      background-origin: border-box;
+      background-clip: padding-box, border-box;
+      background-size: auto, 250% 250%;
+      animation: lli-credit-border-shift 7s ease infinite;
+      text-decoration: none;
+      line-height: 1;
+      transition: transform .3s cubic-bezier(.4,0,.2,1);
+      font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+      box-sizing: border-box;
+      max-width: 100%;
+    }
+    .lli-credit:hover { transform: translateY(-1px); }
+    .lli-credit__mark { flex: 0 0 24px; width: 24px; height: 24px; border-radius: 999px; background: rgba(255,255,255,0.06); padding: 3px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .lli-credit__mark img { width: 100%; height: 100%; object-fit: contain; display: block; }
+    .lli-credit__label { display: flex; align-items: center; gap: 7px; white-space: nowrap; }
+    .lli-credit__faint { color: #A6A9B3; font-weight: 400; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; }
+    .lli-credit__sep { width: 3px; height: 3px; border-radius: 50%; background: rgba(255,255,255,0.18); display: inline-block; flex-shrink: 0; }
+    .lli-credit__brand { color: #fff; font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: .08em; }
+    .lli-credit__it { color: #FF8A00; }
+    @media (max-width: 480px) {
+      .lli-credit { padding: 5px 12px 5px 5px; gap: 7px; }
+      .lli-credit__faint { font-size: 9px; }
+      .lli-credit__brand { font-size: 10px; }
+    }
+    @media (prefers-reduced-motion: reduce) { .lli-credit { animation: none; } }
     .foot-base { border-top: 1px solid rgba(255,255,255,0.2); padding-top: 18px; display: flex; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; font-size: 0.85rem; color: rgba(255,255,255,0.55); }
 
     @media (max-width: 960px) {
@@ -764,6 +809,18 @@
       <div class="foot-base">
         <span>Copyright © 2026 ELTEK International Laboratories. All content owned by ELTEK.</span>
         <span>St. Charles, MO · 12 min from STL Lambert Airport</span>
+      </div>
+      <div class="foot-credit">
+        <a class="lli-credit" href="https://locallogicit.com" target="_blank" rel="noopener">
+          <span class="lli-credit__mark">
+            <img src="/uploads/local-logic-mark.png" alt="Local Logic IT" width="96" height="96" />
+          </span>
+          <span class="lli-credit__label">
+            <span class="lli-credit__faint">Website powered by</span>
+            <span class="lli-credit__sep" aria-hidden="true"></span>
+            <span class="lli-credit__brand">LOCAL LOGIC <span class="lli-credit__it">IT</span></span>
+          </span>
+        </a>
       </div>
     </div>
   </footer>
