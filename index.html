@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="preload" as="image" href="uploads/eltek/video/eltek-hero-poster.jpg" fetchpriority="high">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
@@ -58,8 +59,9 @@
     .arrow-link { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.15rem; text-transform: uppercase; letter-spacing: 0.06em; text-decoration: none; border-bottom: 3px solid var(--accent); padding-bottom: 2px; display: inline-block; cursor: pointer; }
 
     /* hero */
-    .hero { position: relative; min-height: 86vh; display: flex; align-items: flex-end; color: #fff; overflow: hidden; background: var(--ink); }
-    .hero video { position: absolute; left: 0; top: 0; width: 100%; height: 116%; object-fit: cover; object-position: 50% 0; }
+    .hero { position: relative; min-height: 86vh; display: flex; align-items: flex-end; color: #fff; overflow: hidden; background: var(--ink) url(uploads/eltek/video/eltek-hero-poster.jpg) 50% 0 / cover no-repeat; }
+    .hero video { position: absolute; left: 0; top: 0; width: 100%; height: 116%; object-fit: cover; object-position: 50% 0; opacity: 0; transition: opacity 0.8s ease; }
+    .hero video.is-playing { opacity: 1; }
     .hero-scrim { position: absolute; inset: 0; background: rgba(12,13,15,0.58); }
     .hero-body { position: relative; width: 100%; padding-top: 140px; padding-bottom: clamp(40px, 7vw, 88px); }
     .hero h1 { font-weight: 800; font-size: clamp(3.4rem, 10.5vw, 9.2rem); line-height: 0.88; max-width: 12ch; }
@@ -263,9 +265,7 @@
   <!-- PAGE: HOME -->
   <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
     <section class="hero">
-      <video autoplay muted loop playsinline preload="metadata" poster="uploads/eltek/video/eltek-hero-poster.jpg">
-        <source src="uploads/eltek/video/eltek-hero-background.mp4" type="video/mp4" />
-      </video>
+      <video muted loop playsinline preload="none" poster="uploads/eltek/video/eltek-hero-poster.jpg" data-src="uploads/eltek/video/eltek-hero-background.mp4"></video>
       <div class="hero-scrim"></div>
       <div class="wrap hero-body">
         <h1>Electrical insulation testing</h1>
@@ -850,28 +850,35 @@ class Component extends DCLogic {
 </script>
 <script>
   (function() {
-    function tryPlayVideos() {
-      var videos = document.querySelectorAll('video[autoplay]');
-      videos.forEach(function(video) {
-        if (video.paused) {
-          video.play().catch(function(err) {
-            console.log("Autoplay waiting for user interaction or loading...", err);
-          });
-        }
-      });
+    var conn = navigator.connection || {};
+    var skipVideo = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      || conn.saveData === true
+      || /(^|-)2g$/.test(conn.effectiveType || '')
+      || window.matchMedia('(max-width: 560px)').matches;
+    var loaded = false;
+    function startVideo(video) {
+      if (video.dataset.started || !video.dataset.src) return;
+      video.dataset.started = '1';
+      video.addEventListener('playing', function() { video.classList.add('is-playing'); }, { once: true });
+      video.preload = 'auto';
+      video.src = video.dataset.src;
+      var p = video.play();
+      if (p && p.catch) p.catch(function() {});
     }
-    tryPlayVideos();
-    setInterval(tryPlayVideos, 1000);
-    var interactEvents = ['click', 'touchstart', 'mousedown', 'keydown'];
-    function playOnInteract() {
-      tryPlayVideos();
-      interactEvents.forEach(function(ev) {
-        document.removeEventListener(ev, playOnInteract);
-      });
+    function scan() {
+      if (skipVideo || !loaded) return;
+      document.querySelectorAll('video[data-src]').forEach(startVideo);
     }
-    interactEvents.forEach(function(ev) {
-      document.addEventListener(ev, playOnInteract, { passive: true });
-    });
+    function whenIdle(fn) {
+      if (window.requestIdleCallback) window.requestIdleCallback(fn, { timeout: 2000 });
+      else setTimeout(fn, 500);
+    }
+    function onLoaded() {
+      whenIdle(function() { loaded = true; scan(); });
+    }
+    if (document.readyState === 'complete') onLoaded();
+    else window.addEventListener('load', onLoaded);
+    new MutationObserver(scan).observe(document.body, { childList: true, subtree: true });
   })();
 </script>
 </body>
