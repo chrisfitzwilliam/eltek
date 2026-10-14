@@ -1,26 +1,26 @@
 {
   "/": {
     "lastmod": "2026-10-14",
-    "sha256": "70fdb4d3d640c35b304fdfa12b56b29e5c3a5e14b50ebc3008b54189d11f2aaf"
+    "sha256": "305215a7398fb2a1cb3d23e5f8031b055133ddc562c8587006d70c29f8586da3"
   },
   "/contact/": {
     "lastmod": "2026-10-14",
-    "sha256": "c02ae4b7f73be5f6730b880f2b99497e4cb3c07a0e5dbbb95a02c28bc48237c1"
+    "sha256": "071a582b5b28cf0d5ae0d0e35253418edbf49c905ec616195a943c97cb99c388"
   },
   "/faq/": {
     "lastmod": "2026-10-14",
-    "sha256": "7c42f8687c171cf7f4082fc94f53bbee10a425cd90cc5f5d4c2ec9288ba66511"
+    "sha256": "b7dd39d697d8707bb569a1ec4c9593fa2cd83a30a49d1aef9575bc52a25c3150"
   },
   "/lab-capabilities/": {
     "lastmod": "2026-10-14",
-    "sha256": "12283a6aa143426aa931e59a7bd2aa98440d0f08bf970b4b328afd5e0ef308d8"
+    "sha256": "cd73e0210d1595bc0157090b1c02dd49b079c657ad9180b3ecc8d37e0dfea708"
   },
   "/tests/": {
     "lastmod": "2026-10-14",
-    "sha256": "fe8b4eee4af0481ffc5ff72c8cbb61e63dddd1d48b56367dead57209323362af"
+    "sha256": "4e6f0eb0995af8606e8f26691acc4973a900784b38d71d605b8f10c404de6f6d"
   },
   "/training/": {
     "lastmod": "2026-10-14",
-    "sha256": "fb4391742a0810eb235a460d5c49bdffa7244398743cbf29898b93befc872747"
+    "sha256": "681bae9374336230601867e7454a6ce557307873417588433ce93949e0b68b4d"
   }
 }

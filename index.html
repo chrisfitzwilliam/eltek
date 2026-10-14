@@ -1149,7 +1149,7 @@ class Component extends DCLogic {
     }
     if (document.readyState !== 'loading') onLoaded();
     else document.addEventListener('DOMContentLoaded', onLoaded);
-    new MutationObserver(scan).observe(document.body, { childList: true, subtree: true });
+    new MutationObserver(scan).observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['src', 'data-started'] });
   })();
 </script>
 </body>
