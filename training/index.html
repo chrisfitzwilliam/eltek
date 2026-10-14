@@ -89,7 +89,16 @@
     .hero .btn:not(.btn-line):hover { background: #fff; border-color: #fff; color: var(--ink); }
     .hero-scrim { position: absolute; inset: 0; background: rgba(12,13,15,0.58); }
     .hero-body { position: relative; width: 100%; padding-top: 140px; padding-bottom: clamp(40px, 7vw, 88px); }
-    .hero h1 { font-weight: 800; font-size: clamp(3.4rem, 10.5vw, 9.2rem); line-height: 0.88; max-width: 12ch; }
+    .hero h1, .hero .rot { font-weight: 800; font-size: clamp(3.4rem, 10.5vw, 9.2rem); line-height: 0.88; max-width: 12ch; }
+    .hero-rot { display: grid; }
+    .hero-rot > * { grid-area: 1 / 1; margin: 0; }
+    .hero-rot .rot { opacity: 0; animation: rotCycle 12s ease-in-out infinite backwards; pointer-events: none; }
+    .hero-rot h1 { opacity: 0; animation: rotCycle 12s ease-in-out infinite backwards; animation-delay: -0.6s; }
+    .hero-rot .rot2 { animation-delay: 3.4s; }
+    .hero-rot .rot3 { animation-delay: 7.4s; }
+    .hero-rot:hover > * { animation-play-state: paused; }
+    @keyframes rotCycle { 0% { opacity: 0; transform: translateY(0.22em); } 5% { opacity: 1; transform: none; } 30% { opacity: 1; transform: none; } 35% { opacity: 0; transform: translateY(-0.22em); } 100% { opacity: 0; transform: translateY(-0.22em); } }
+    @media (prefers-reduced-motion: reduce) { .hero-rot h1 { animation: none; opacity: 1; } .hero-rot .rot { display: none; } }
     .hero-sub { max-width: 560px; font-size: 1.15rem; margin: 28px 0 34px; color: rgba(255,255,255,0.88); }
     .hero-cert { margin-top: 44px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.4); font-size: 0.85rem; letter-spacing: 0.04em; color: rgba(255,255,255,0.8); display: flex; gap: 8px 28px; flex-wrap: wrap; }
 
@@ -337,7 +346,11 @@
       <video muted loop playsinline preload="none" poster="/uploads/eltek/video/eltek-hero-poster.jpg" data-src="/uploads/eltek/video/eltek-hero-background.mp4"></video>
       <div class="hero-scrim"></div>
       <div class="wrap hero-body">
-        <h1>Electrical insulation testing</h1>
+        <div class="hero-rot">
+          <h1>Electrical insulation testing</h1>
+          <div class="rot rot2" aria-hidden="true">Thermal endurance testing</div>
+          <div class="rot rot3" aria-hidden="true">Material flammability testing</div>
+        </div>
         <p class="hero-sub">Since 1987, ELTEK has tested the insulation inside motors, generators and transformers for manufacturers around the world. One accredited lab, from materials to finished systems.</p>
         <div class="btn-row">
           <a href="/contact/" class="btn" onClick="{{ goContact }}">Request a quote</a>
@@ -1079,6 +1092,10 @@ class Component extends DCLogic {
       if (video.dataset.started || !video.dataset.src) return;
       video.dataset.started = '1';
       video.addEventListener('playing', function() { video.classList.add('is-playing'); }, { once: true });
+      video.muted = true;
+      video.defaultMuted = true;
+      video.loop = true;
+      video.playsInline = true;
       video.preload = 'auto';
       video.src = video.dataset.src;
       var p = video.play();
