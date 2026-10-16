@@ -76,6 +76,8 @@ def head_block(cfg, route):
         '<meta name="description" content="%s">' % esc(route["description"]),
         '<link rel="canonical" href="%s">' % esc(url),
     ]
+    if route.get("noindex"):
+        lines.append('<meta name="robots" content="noindex">')
     if cfg.get("favicon"):
         lines.append('<link rel="icon" href="%s" sizes="any">' % esc(cfg["favicon"]))
         lines.append('<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png">')
@@ -163,6 +165,8 @@ def sitemap(cfg, files, state, today):
     new_state = {}
     entries = []
     for route in cfg["routes"]:
+        if route.get("noindex"):
+            continue
         key = "index.html" if route["path"] == "/" else route["path"].strip("/") + "/index.html"
         digest = hashlib.sha256(files[key].encode("utf-8")).hexdigest()
         prev = state.get(route["path"], {})
