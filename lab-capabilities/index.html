@@ -770,6 +770,64 @@
     </div>
   </sc-if>
 
+  <!-- PAGE: PAY AN INVOICE -->
+  <sc-if value="{{ isPay }}" hint-placeholder-val="{{ false }}">
+    <div class="pg">
+      <section class="ph">
+        <img src="/uploads/stock/materials-test-frame.jpg" alt="" style="object-position:50% 50%;" />
+        <div class="ph-scrim"></div>
+        <div class="wrap ph-body">
+          <h1>Pay an invoice</h1>
+          <p>Pay your ELTEK invoice by credit card through our secure payment page.</p>
+        </div>
+      </section>
+
+      <section class="sec" style="padding-top:clamp(36px,5vw,64px);">
+        <div class="wrap contact">
+          <div>
+            <div class="info-block">
+              <div class="info-lbl">How it works</div>
+              <div class="info-val">Enter your invoice number and the amount due. You will then be taken to a secure Authorize.net page to enter your card details. Your card information is never entered on or stored by this website.</div>
+            </div>
+            <div class="info-block">
+              <div class="info-lbl">Questions about an invoice</div>
+              <a href="tel:6369495835" class="info-tel">636-949-5835</a>
+            </div>
+          </div>
+
+          <div class="form">
+            <sc-if value="{{ payReturned }}" hint-placeholder-val="{{ false }}">
+              <div class="sent" style="padding-top:0;">
+                <h3>Thank you</h3>
+                <p>You have returned from the secure payment page. A receipt was shown at the end of your payment. If you have any question about your payment, call 636-949-5835.</p>
+              </div>
+            </sc-if>
+            <h2>Invoice payment</h2>
+            <form onSubmit="{{ handlePay }}">
+              <div class="form-grid">
+                <div><label for="p-invoice">Invoice number *</label><input id="p-invoice" type="text" name="invoice" placeholder="Invoice number" required="true" maxlength="20" /></div>
+                <div><label for="p-amount">Amount (USD) *</label><input id="p-amount" type="text" name="amount" inputmode="decimal" placeholder="0.00" required="true" maxlength="12" /></div>
+              </div>
+              <div class="form-grid">
+                <div><label for="p-name">Name *</label><input id="p-name" type="text" name="name" placeholder="Your name" required="true" maxlength="100" /></div>
+                <div><label for="p-company">Company</label><input id="p-company" type="text" name="company" placeholder="Company name" maxlength="100" /></div>
+              </div>
+              <div style="margin-bottom:20px;">
+                <label for="p-email">Email *</label>
+                <input id="p-email" type="email" name="email" placeholder="you@company.com" required="true" maxlength="200" />
+              </div>
+              <div style="position:absolute;left:-9999px;" aria-hidden="true"><input type="text" name="website" tabindex="-1" autocomplete="off" /></div>
+              <sc-if value="{{ payError }}" hint-placeholder-val="{{ false }}">
+                <p style="color:#A32020;margin:0 0 14px;">{{ payErrorText }}</p>
+              </sc-if>
+              <button type="submit" class="btn">{{ payBtnLabel }}</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </div>
+  </sc-if>
+
   <!-- PAGE: NOT FOUND (served as 404.html for unknown paths) -->
   <sc-if value="{{ isNotFound }}" hint-placeholder-val="{{ false }}">
     <div class="pg">
@@ -809,6 +867,7 @@
             <a href="/faq/" onClick="{{ goFaq }}">FAQ</a>
             <a href="/training/" onClick="{{ goTraining }}">Training</a>
             <a href="/contact/" onClick="{{ goContact }}">Contact</a>
+            <a href="/pay/" onClick="{{ goPay }}">Pay an invoice</a>
           </div>
         </div>
         <div>
@@ -863,7 +922,10 @@
       "description": "Electrical insulation training from ELTEK through the TEKtrack program: in-person workshops, live virtual workshops and focused virtual seminars on your topics." },
     { "page": "contact", "path": "/contact/", "nav": "Contact",
       "title": "Contact | ELTEK International Laboratories",
-      "description": "Request a quote or discuss a testing project with ELTEK International Laboratories, 248 Hughes Lane, St. Charles, MO 63301. Call 636-949-5835 or send a message." }
+      "description": "Request a quote or discuss a testing project with ELTEK International Laboratories, 248 Hughes Lane, St. Charles, MO 63301. Call 636-949-5835 or send a message." },
+    { "page": "pay", "path": "/pay/", "nav": "Pay an invoice",
+      "title": "Pay an Invoice | ELTEK International Laboratories",
+      "description": "Pay an ELTEK International Laboratories invoice online by credit card through a secure Authorize.net payment page." }
   ],
   "notFound": {
     "title": "Page not found | ELTEK International Laboratories",
@@ -937,7 +999,7 @@ function eltekApplyRoute(page, push) {
 
 
 class Component extends DCLogic {
-  state = { page: eltekPageFromPath(location.pathname), openIdx: -1, formSent: false, formSending: false, formError: false };
+  state = { page: eltekPageFromPath(location.pathname), openIdx: -1, formSent: false, formSending: false, formError: false, paySending: false, payError: false, payErrorText: '' };
 
   go = (page) => (e) => {
     if (e) {
@@ -957,6 +1019,7 @@ class Component extends DCLogic {
   goFaq      = this.go('faq');
   goTraining = this.go('training');
   goContact  = this.go('contact');
+  goPay      = this.go('pay');
 
   onPopState = () => {
     const page = eltekPageFromPath(location.pathname);
@@ -996,8 +1059,48 @@ class Component extends DCLogic {
       });
   };
 
+  handlePay = (e) => {
+    e.preventDefault();
+    if (this.state.paySending) return;
+    const f = e.target;
+    const val = (n) => (f.elements[n] ? f.elements[n].value : '');
+    const payload = {
+      invoice: val('invoice'), amount: val('amount'), name: val('name'),
+      company: val('company'), email: val('email'), website: val('website'),
+    };
+    const fail = (text) => this.setState({ paySending: false, payError: true, payErrorText: text });
+    this.setState({ paySending: true, payError: false });
+    fetch('https://eltek-pay.cl1p-worker.workers.dev', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    })
+      .then((r) => r.json().then((j) => ({ status: r.status, body: j })).catch(() => ({ status: r.status, body: {} })))
+      .catch(() => null)
+      .then((res) => {
+        if (!res) return fail('Sorry, we could not reach the payment service. Please try again, or call 636-949-5835.');
+        const b = res.body || {};
+        if (b.ok && b.token && /^https:\/\/(accept|test)\.authorize\.net\/payment\/payment$/.test(b.formUrl || '')) {
+          const form = document.createElement('form');
+          form.method = 'POST';
+          form.action = b.formUrl;
+          const input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = 'token';
+          input.value = b.token;
+          form.appendChild(input);
+          document.body.appendChild(form);
+          form.submit();
+          return;
+        }
+        if (b.error === 'amount') return fail('Please enter an amount between 1.00 and 50,000.00, for example 1250.00.');
+        if (b.error === 'invalid') return fail('Please check the invoice number, name and email address and try again.');
+        fail('Sorry, we could not start the payment. Please try again, or call 636-949-5835.');
+      });
+  };
+
   renderVals() {
-    const { page, openIdx, formSent, formSending, formError } = this.state;
+    const { page, openIdx, formSent, formSending, formError, paySending, payError, payErrorText } = this.state;
 
     const ns = (p) => ({
       color: page === p ? '#fff' : 'rgba(255,255,255,0.68)',
@@ -1057,6 +1160,7 @@ class Component extends DCLogic {
       isFaq:      page === 'faq',
       isTraining: page === 'training',
       isContact:  page === 'contact',
+      isPay:      page === 'pay',
       isNotFound: page === 'notfound',
       hn: ns('home'),
       cn: ns('cap'),
@@ -1070,6 +1174,7 @@ class Component extends DCLogic {
       goFaq:      this.goFaq,
       goTraining: this.goTraining,
       goContact:  this.goContact,
+      goPay:      this.goPay,
       faqs,
       testCats,
       formSent,
@@ -1077,6 +1182,11 @@ class Component extends DCLogic {
       formBtnLabel: formSending ? 'Sending…' : 'Submit message',
       formNotSent: !formSent,
       handleSubmit: this.handleSubmit,
+      payReturned: /[?&]returned=1(&|$)/.test(location.search),
+      payError,
+      payErrorText,
+      payBtnLabel: paySending ? 'Opening secure payment page…' : 'Continue to secure payment',
+      handlePay: this.handlePay,
     };
   }
 }
